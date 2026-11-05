@@ -236,6 +236,11 @@ tr:last-child td{border-bottom:0}
 .rev-ans{font-size:12px;color:var(--text);margin-bottom:4px}
 .rev-exp{font-size:12px;color:var(--text2);line-height:1.6}
 
+/* CONTEXTO DE ARTIGO */
+.q-ctx{background:rgba(185,122,255,.07);border:1px solid rgba(185,122,255,.25);border-left:3px solid var(--purple);border-radius:6px;padding:11px 14px;margin-bottom:16px;font-size:12.5px;line-height:1.6;color:var(--text2)}
+.q-ctx-head{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:4px}
+.rev-item .q-ctx{margin-bottom:8px;font-size:11.5px}
+
 /* SIMULAR PROVA */
 .prova-box{border:1px solid rgba(79,138,255,.45);border-radius:10px;background:linear-gradient(135deg,rgba(79,138,255,.10),rgba(185,122,255,.05) 60%,transparent),var(--surface);padding:22px;display:flex;flex-direction:column;gap:16px;margin-bottom:12px}
 .prova-box h2{font-size:22px;font-weight:800;color:var(--text-hi);letter-spacing:-.01em;margin-bottom:6px}
@@ -998,7 +1003,7 @@ const MODS = [
   ]},
 
 /* ================= ARTIGO ================= */
-{ id:"artigo", kind:"artigo", n:"A1", tag:"Art. Idosos", file:"37654-97-30750-1-10-20251015.pdf", title:"Workshops com pessoas idosas (IHC 2025)",
+{ id:"artigo", kind:"artigo", ctx:"Artigo “Falando, desenhando e avaliando” (Verhalen, Iwashita e Silva e Rodrigues, ICMC-USP, IHC 2025): relato de três workshops com 9 pessoas idosas, usando Design Centrado no Humano, para criar um repositório de tecnologias com conteúdo acessível para idosos.", n:"A1", tag:"Art. Idosos", file:"37654-97-30750-1-10-20251015.pdf", title:"Workshops com pessoas idosas (IHC 2025)",
   lead:"Verhalen, Iwashita e Silva e Rodrigues (ICMC-USP). “Falando, desenhando e avaliando: workshops para a construção de um repositório sobre tecnologias para pessoas idosas”. IHC 2025, trilha Relatos de Experiência.",
   topics:"DCH (ISO 9241-210) · design participativo · protótipos · SUS e SAM · dificuldades e interesses",
   body:`
@@ -1107,7 +1112,7 @@ const MODS = [
   ]},
 
 /* ================= ARTIGO: DUOLINGO ================= */
-{ id:"art-duolingo", kind:"artigo", n:"A2", tag:"Art. Duolingo", file:"37677-97-30773-1-10-20251015.pdf", title:"Duolingo: ensinando ou manipulando? (IHC 2025)",
+{ id:"art-duolingo", kind:"artigo", ctx:"Artigo “Teaching or Manipulating?” (Castro e Valença, UFRPE, IHC 2025): análise da interface do Duolingo, app de idiomas com mais de 100 milhões de usuários, muitos deles crianças, em busca de padrões enganosos (dark patterns) e padrões éticos (bright patterns). O mascote do app é o Duo, uma coruja verde.", n:"A2", tag:"Art. Duolingo", file:"37677-97-30773-1-10-20251015.pdf", title:"Duolingo: ensinando ou manipulando? (IHC 2025)",
   lead:"Castro e Valença (UFRPE). “Teaching or Manipulating? On the Adoption of Bright and Deceptive Patterns by Duolingo”. IHC 2025, trilha Ideias Inovadoras e Resultados Emergentes.",
   topics:"Deceptive (dark) patterns · bright/fair patterns · crianças · gamificação · ética",
   body:`
@@ -1135,7 +1140,7 @@ const MODS = [
 <div class="tbl"><table>
 <tr><th>Padrão</th><th>O que foi observado</th><th>Tipo</th></tr>
 <tr><td>Gamificação</td><td>Ligas (competição contínua), vidas (punição por erro), <strong>ofensivas</strong> (pressão por uso diário; medo de perder a sequência)</td><td>Enganoso quando gera ansiedade</td></tr>
-<tr><td>Apelo emocional (“cuteness”)</td><td>Mascote Duo com tristeza e raiva, “Você me decepcionou…”: indução de culpa em crianças</td><td>Enganoso</td></tr>
+<tr><td>Apelo emocional (“cuteness”)</td><td>O mascote Duo, uma coruja verde, aparece triste ou com raiva (“Você me decepcionou…”): indução de culpa em crianças</td><td>Enganoso</td></tr>
 <tr><td>Notificações</td><td>Frequentes e emocionalmente carregadas</td><td>Enganoso</td></tr>
 <tr><td>Obstrução e custos ocultos</td><td>Destaque ao “teste grátis”; <strong>seis etapas</strong> até ver o preço real</td><td>Enganoso</td></tr>
 <tr><td>“Escape hatch”</td><td>Exclusão da conta em <strong>3 cliques</strong>, sem punição</td><td>Claro (bright)</td></tr>
@@ -1160,14 +1165,14 @@ const MODS = [
   {q:"Segundo Harry Brignull (2010), citado no artigo, dark patterns (padrões enganosos) são:", o:["Padrões de cores escuras usados em modo noturno","Truques em sites e apps que fazem o usuário fazer coisas que não pretendia, como comprar ou assinar algo","Erros de programação que travam o aplicativo","Diretrizes de acessibilidade para crianças"], a:1, e:"Eles alteram a arquitetura de escolha e exploram vieses cognitivos contra o interesse do usuário."},
   {q:"Os bright (ou fair) patterns são:", o:["Padrões que aumentam o brilho da tela","Estratégias éticas de design que favorecem decisões informadas e a autonomia do usuário","Técnicas de gamificação para aumentar a retenção a qualquer custo","Notificações frequentes para lembrar o usuário de estudar"], a:1, e:"São a resposta orientada à solução contra o design manipulativo."},
   {q:"Qual foi o método do estudo sobre o Duolingo?", o:["Teste de usabilidade com 30 crianças em laboratório","Uso exploratório por dois pesquisadores durante 10 dias, revisão da literatura e análise comparativa, sem testes com usuários","Questionário SUS aplicado a 100 milhões de usuários","Avaliação heurística com cinco especialistas"], a:1, e:"A ausência de usuários é a principal limitação apontada pelos autores (validade externa)."},
-  {q:"O mascote Duo aparece triste ou zangado com mensagens como “Você me decepcionou…” quando a criança não pratica. Qual padrão enganoso é esse?", o:["Obstrução","Custos ocultos","Apelo emocional (“cuteness”) com indução de culpa","Escape hatch"], a:2, e:"Elementos fofos criam laço afetivo, e a tristeza do mascote explora emocionalmente usuários jovens."},
+  {q:"O mascote do Duolingo é o Duo, uma coruja verde que aparece nas telas e nas notificações do app. Quando a criança não pratica, a coruja aparece triste ou zangada, com mensagens como “Você me decepcionou…”. Qual padrão enganoso é esse?", o:["Obstrução","Custos ocultos","Apelo emocional (“cuteness”) com indução de culpa","Escape hatch"], a:2, e:"Elementos fofos criam laço afetivo, e a tristeza do mascote explora emocionalmente usuários jovens."},
   {q:"O app destaca o “teste grátis” e exige seis etapas até mostrar o preço real da assinatura. Isso foi classificado como:", o:["Bright pattern de transparência de custos","Obstrução e custos ocultos","Fair UX","Gamificação saudável"], a:1, e:"Dificulta decisões financeiras informadas e cria falsas expectativas em crianças."},
   {q:"A exclusão da conta em 3 cliques, sem punição, é um bright pattern (“escape hatch”). Qual heurística de Nielsen ele atende?", o:["Controle e liberdade do usuário","Prevenção de erros","Projeto estético e minimalista","Ajuda e documentação"], a:0, e:"É a “saída de emergência” claramente marcada que a heurística pede."},
   {q:"Qual próximo passo os autores propõem para envolver as crianças no estudo?", o:["Avaliação heurística por especialistas","Design participativo com crianças (Child Rights by Design) e estudos por faixa etária","Remover o app das lojas","Aplicar apenas o questionário TAM"], a:1, e:"Também propõem estudos longitudinais e comparação com outras plataformas educacionais."}
   ]},
 
 /* ================= ARTIGO: DARK PATTERNS EM JOGOS ================= */
-{ id:"art-dark", kind:"artigo", n:"A3", tag:"Art. Dark Patterns", file:"Dark Patterns in Games, An Empirical Study of Their Harmfulness.pdf", title:"Dark Patterns em jogos (ICEIS 2025)",
+{ id:"art-dark", kind:"artigo", ctx:"Artigo “Dark Patterns in Games” (Veiga et al., UFAM, ICEIS 2025): catálogo de 13 dark patterns em jogos, isto é, estratégias de design que manipulam o jogador, e questionário com 30 jogadores para medir o quanto cada padrão é percebido como nocivo.", n:"A3", tag:"Art. Dark Patterns", file:"Dark Patterns in Games, An Empirical Study of Their Harmfulness.pdf", title:"Dark Patterns em jogos (ICEIS 2025)",
   lead:"Veiga, Silva, Gadelha, Oliveira e Conte (UFAM). “Dark Patterns in Games: An Empirical Study of Their Harmfulness”. ICEIS 2025.",
   topics:"Catálogo de dark patterns · temporal, monetário, social · questionário Likert · rankings",
   body:`
@@ -1215,7 +1220,7 @@ const MODS = [
   ]},
 
 /* ================= ARTIGO: JOGOS SÉRIOS ================= */
-{ id:"art-jogos", kind:"artigo", n:"A4", tag:"Art. Jogos Sérios", file:"22435-1838-18208-1-10-20221111.pdf", title:"Usabilidade em jogos sérios de IHC (SBIE 2022)",
+{ id:"art-jogos", kind:"artigo", ctx:"Artigo “Avaliação de Características de Usabilidade em Jogos Sérios em IHC” (Guimarães et al., UnB, SBIE 2022): duas avaliadoras verificaram quantas de 37 especificações de usabilidade estavam implementadas em três jogos educativos usados no ensino de IHC (MACteaching, UsabiliCity e UsabilityGame).", n:"A4", tag:"Art. Jogos Sérios", file:"22435-1838-18208-1-10-20221111.pdf", title:"Usabilidade em jogos sérios de IHC (SBIE 2022)",
   lead:"Guimarães, Sales, Santos e Palmeira (UnB/UDESC). “Avaliação de Características de Usabilidade em Jogos Sérios em Interação Humano-Computador”. SBIE 2022.",
   topics:"Jogos sérios · mecanismos de usabilidade (Juristo) · avaliação heurística · Kappa de Cohen",
   body:`
@@ -1265,7 +1270,7 @@ const MODS = [
   ]},
 
 /* ================= ARTIGO: DIRETRIZES APPS IDOSOS ================= */
-{ id:"art-gomez", kind:"artigo", n:"A5", tag:"Art. Apps Idosos", file:"gomez-hernandez-2023-design-guidelines-older-adults.pdf", title:"Diretrizes de apps para idosos (JMIR 2023)",
+{ id:"art-gomez", kind:"artigo", ctx:"Artigo “Design Guidelines of Mobile Apps for Older Adults” (Gomez-Hernandez et al., JMIR mHealth 2023): revisão sistemática que reuniu, a partir de 40 estudos com testes de usabilidade com pessoas de 60 anos ou mais, 2 regras de ouro e 25 diretrizes para apps móveis voltados a idosos.", n:"A5", tag:"Art. Apps Idosos", file:"gomez-hernandez-2023-design-guidelines-older-adults.pdf", title:"Diretrizes de apps para idosos (JMIR 2023)",
   lead:"Gomez-Hernandez, Ferre, Moral e Villalba-Mora. “Design Guidelines of Mobile Apps for Older Adults: Systematic Review and Thematic Analysis”. JMIR mHealth and uHealth, 2023.",
   topics:"Revisão sistemática · 2 regras de ouro · 25 diretrizes em 5 categorias · design universal",
   body:`
@@ -1326,7 +1331,7 @@ const MODS = [
   ]},
 
 /* ================= ARTIGO: LLM + XR ================= */
-{ id:"art-xr", kind:"artigo", n:"A6", tag:"Art. LLM + XR", file:"Context-Aware_Computing_Seminario_IHC_12Slides.pdf", title:"LLMs em realidade estendida (CHI ’25)",
+{ id:"art-xr", kind:"artigo", ctx:"Artigo “LLM Integration in Extended Reality” (Tang et al., University of Illinois, CHI ’25): revisão de 135 estudos que combinam modelos de linguagem (LLMs) com realidade estendida (VR, AR e MR), apresentada no seminário sobre context-aware computing, os sistemas que se adaptam ao contexto do usuário.", n:"A6", tag:"Art. LLM + XR", file:"Context-Aware_Computing_Seminario_IHC_12Slides.pdf", title:"LLMs em realidade estendida (CHI ’25)",
   lead:"Tang, Situ, Cui, Wu e Huang (University of Illinois). “LLM Integration in Extended Reality: A Comprehensive Review of Current Trends, Challenges, and Future Perspectives”. CHI ’25. Apresentado como seminário sobre Context-Aware Computing.",
   topics:"Context-aware computing · 4 pilares de consciência · 5º pilar ético · cinetose",
   body:`
@@ -1455,7 +1460,7 @@ const EXTRA = {
      model:"<p>O artigo usa o <strong>Design Centrado no Humano</strong> (ISO 9241-210; Norman, 2013), com quatro etapas e participação do usuário final em todas: análise, design, avaliação e implementação. Foram feitos três workshops com 9 pessoas idosas:</p><ul><li><strong>Análise (1º encontro):</strong> TCLE, questionário demográfico e discussão aberta, que levantou 18 dificuldades (acessibilidade, usabilidade e letramento) e 9 interesses (financeiro, saúde, documentação, segurança e organização).</li><li><strong>Design (2º encontro):</strong> aula sobre cores e tipos de protótipo e depois design participativo, com protótipos de baixa fidelidade em papel. Em seguida testaram um protótipo de média-alta fidelidade no Figma.</li><li><strong>Avaliação (3º encontro):</strong> teste de usabilidade individual com protótipo de mais de 100 telas, 4 tarefas, SAM e SUS e entrevista semiestruturada.</li></ul><p>A <strong>implementação</strong> fica para depois e é a etapa com menor participação do usuário.</p>"}]},
  "art-duolingo":{df:"eemmmhm", open:[{d:"m", q:"Diferencie deceptive patterns de bright patterns e dê um exemplo de cada encontrado no Duolingo.",
      keys:["Deceptive: manipulam o usuário explorando vieses cognitivos (Brignull, 2010)","Bright: design ético que favorece decisões informadas e autonomia","Exemplo enganoso: mascote triste, ofensivas, notificações, seis etapas até o preço","Exemplo claro: exclusão de conta em 3 cliques, cancelamento claro"],
-     model:"<p><strong>Deceptive (dark) patterns</strong> são truques de interface que levam o usuário a fazer o que não pretendia, explorando vieses cognitivos (Brignull, 2010). <strong>Bright (fair) patterns</strong> são estratégias éticas que buscam decisões voluntárias e informadas e a autonomia do usuário.</p><p><strong>No Duolingo, enganosos:</strong> o mascote Duo triste ou zangado (“Você me decepcionou…”), que induz culpa; as ofensivas, que pressionam o uso diário; notificações excessivas; e seis etapas até o preço real, com foco no teste grátis.</p><p><strong>Claros:</strong> exclusão de conta em 3 cliques (escape hatch), cancelamento de assinatura claro e navegação limpa.</p>"}]},
+     model:"<p><strong>Deceptive (dark) patterns</strong> são truques de interface que levam o usuário a fazer o que não pretendia, explorando vieses cognitivos (Brignull, 2010). <strong>Bright (fair) patterns</strong> são estratégias éticas que buscam decisões voluntárias e informadas e a autonomia do usuário.</p><p><strong>No Duolingo, enganosos:</strong> o mascote Duo, uma coruja verde, aparecendo triste ou zangado (“Você me decepcionou…”), que induz culpa; as ofensivas, que pressionam o uso diário; notificações excessivas; e seis etapas até o preço real, com foco no teste grátis.</p><p><strong>Claros:</strong> exclusão de conta em 3 cliques (escape hatch), cancelamento de assinatura claro e navegação limpa.</p>"}]},
  "art-dark":{df:"memhm"},
  "art-jogos":{df:"emmmmh"},
  "art-gomez":{df:"eemmhm", tf:[{d:"m", t:"Avalie as afirmações sobre as diretrizes de apps para idosos.", s:[
@@ -1544,6 +1549,7 @@ const L = ["A","B","C","D","E"];
 function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function pool(){ return BANK.filter(q=>(selProva==="all"||q.src===selProva)&&selAulas.has(q.mi)&&selDiffs.has(q.diff)&&selTypes.has(q.type)); }
 function aulaTag(mi){ return MODS[mi].tag || `Aula ${MODS[mi].n}`; }
+function ctxBlock(q){ const c = MODS[q.mi].ctx; return (q.tema==="artigo" && c) ? `<div class="q-ctx"><span class="q-ctx-head">Contexto</span>${c}</div>` : ""; }
 function modLabel(mi){ const m=MODS[mi]; return m.kind==="artigo" ? m.title : `Aula ${m.n} · ${m.title}`; }
 
 /* ── PROVA SIMULADA: 4 artigos · 1 Gestalt · 3 WCAG · resto da matéria ── */
@@ -1783,7 +1789,7 @@ function renderQ(){
     </div>
     <div class="prog-track"><div class="prog-fill" style="width:${quiz.cur/quiz.questions.length*100}%"></div></div>
     <div class="q-card"><div class="q-stripe ${q.type==="open"?"open":q.diff}"></div>
-      <div class="q-body"><p class="q-text">${q.text}</p>${inner}<div id="fb"></div></div>
+      <div class="q-body">${ctxBlock(q)}<p class="q-text">${q.text}</p>${inner}<div id="fb"></div></div>
     </div>
     <div class="quiz-nav"><button class="btn-next" id="btn-next" hidden>${quiz.cur+1<quiz.questions.length?"Próxima questão →":"Ver resultado →"}</button>
       <button class="btn-quit" id="btn-quit">Encerrar simulado</button></div>
@@ -1891,7 +1897,7 @@ function showResults(){
   const temaRows = ["artigo","gestalt","wcag","materia"].filter(t=>byT[t]).map(t=>{ const v=byT[t], p=v.c/v.t;
     return `<div class="rt-row"><span class="rt-label">${TEMA_LBL[t]}</span><span class="rt-val ${p>=.7?"g":p>=.5?"y":"r"}">${v.c}/${v.t}</span></div>`; }).join("");
   const review = H.map((h,i)=>`<div class="rev-item ${h.correct?"ok":"err"}">
-      <div class="rev-q">${i+1}. ${h.q.text}</div>
+      ${ctxBlock(h.q)}<div class="rev-q">${i+1}. ${h.q.text}</div>
       <div class="rev-meta">${h.q.src==="pf"?`<span class="tag tag-pf">PF · Q${h.q.pfn}</span>`:""}<span class="tag tag-topic">${aulaTag(h.q.mi)}</span><span class="tag tag-${h.q.diff}">${DLBL[h.q.diff]}</span>${h.q.type==="tf"?`<span class="tag tag-tf">V / F</span>`:""}
         <span class="rev-res" style="color:${h.correct?"var(--green)":"var(--red)"}">${h.correct?"✓ Correto":"✗ Incorreto"}</span></div>
       ${h.q.type==="mc"?`<div class="rev-ans">Sua resposta: ${h.user}${h.correct?"":`<br>Correta: ${h.q.options[h.q.answer]}`}</div>`
