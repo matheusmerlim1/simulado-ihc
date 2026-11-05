@@ -239,6 +239,32 @@ tr:last-child td{border-bottom:0}
 .rev-ans{font-size:12px;color:var(--text);margin-bottom:4px}
 .rev-exp{font-size:12px;color:var(--text2);line-height:1.6}
 
+/* BUSCA */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box input{width:100%;background:var(--code-bg);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:var(--f-display);font-size:13px;padding:10px 34px 10px 34px;outline:none;-webkit-appearance:none;appearance:none}
+.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.search-box::before{content:"";position:absolute;left:12px;width:13px;height:13px;border:2px solid var(--muted);border-radius:50%;box-sizing:border-box;pointer-events:none}
+.search-box::after{content:"";position:absolute;left:23px;top:calc(50% + 4px);width:6px;height:2px;background:var(--muted);transform:rotate(45deg);pointer-events:none}
+.search-box input::-webkit-search-cancel-button{display:none}
+.search-clear{position:absolute;right:6px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;width:24px;height:24px;border-radius:4px}
+.search-clear:hover{color:var(--text);background:var(--surface2)}
+.side-search{margin:0 0 10px}
+.home-search{margin:0 0 10px}
+.home-search input{font-size:15px;padding:14px 16px 14px 40px;border-radius:9px}
+.home-search::before{left:15px}.home-search::after{left:26px}
+.search-res{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.home-res{margin-bottom:22px;max-height:460px;overflow-y:auto;padding-right:4px}
+.search-count,.search-empty{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin:2px 2px 4px;line-height:1.5}
+.search-empty{font-family:var(--f-display);font-size:12.5px;color:var(--text2)}
+.search-hit{display:flex;flex-direction:column;gap:3px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:10px 12px;cursor:pointer;font:inherit;color:var(--text);transition:border-color .12s}
+.search-hit:hover,.search-hit:focus-visible{border-color:var(--accent)}
+.sh-page{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sh-head{font-size:13px;font-weight:700;color:var(--text-hi);line-height:1.35}
+.sh-snip{font-size:12px;color:var(--text2);line-height:1.5}
+.search-hit mark,.prose mark.hit{background:rgba(245,200,66,.28);color:var(--text-hi);border-radius:2px;padding:0 1px}
+.prose mark.hit{box-shadow:0 0 0 1px rgba(245,200,66,.5)}
+
 /* PÁGINAS DE CONTEÚDO: MENU LATERAL */
 main.wide{max-width:1240px}
 .content-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:44px;align-items:start}
@@ -1625,6 +1651,276 @@ MODS.forEach((m,mi)=>{
   (x.open||[]).forEach(o=>BANK.push({src:"aulas", type:"open", mi, tema:temaOf(m,-1,"open"), text:o.q, keys:o.keys, model:o.model, exp:"", diff:DMAP[o.d]||"medium"}));
 });
 PF.forEach(p=>BANK.push({src:"pf", type:"open", mi:p.mi, pfn:p.n, tema: p.n===5?"gestalt":p.n===10?"wcag":"materia", text:p.q, keys:p.keys, model:p.model, exp:"", diff:DMAP[p.d]}));
+/* ══════════════════════════════════════════════════════
+   QUESTÕES ADICIONAIS (a alternativa correta é sempre a 1ª
+   no dado; as alternativas são embaralhadas na exibição)
+   g:1 = Gestalt · nw:1 = da aula 08 mas não é WCAG
+   ══════════════════════════════════════════════════════ */
+const A1P = "No artigo “Falando, desenhando e avaliando” (IHC 2025), sobre workshops com pessoas idosas,";
+const DUP = "No artigo “Teaching or Manipulating?” (IHC 2025), que analisa o Duolingo,";
+const DKP = "No artigo “Dark Patterns in Games” (ICEIS 2025),";
+const JGP = "No artigo sobre usabilidade em jogos sérios de IHC (SBIE 2022),";
+const GOP = "No artigo de Gomez-Hernandez et al. (2023), sobre diretrizes de apps móveis para pessoas idosas,";
+const XRP = "Na revisão de Tang et al. (CHI ’25) sobre LLMs em realidade estendida,";
+const MORE = {
+"aula-0":[
+ {d:"e",q:"Segundo a aula, quem desenvolve os sistemas e cuida da arquitetura e da implementação das interfaces interativas?",o:["Cientistas da computação e engenheiros de software","UI Designers","Psicólogos cognitivos","Especialistas em acessibilidade"],e:"UI e UX cuidam do design; psicólogos e ergonomistas, das limitações humanas; engenheiros, da construção."},
+ {d:"e",q:"Qual profissional analisa percepção, memória, atenção e limitações humanas para que a interface seja adequada ao usuário?",o:["Psicólogo cognitivo ou ergonomista","UI Designer","Analista de marketing","Engenheiro de redes"],e:"É a descrição dada nos slides da aula 00."},
+ {d:"e",q:"Na lista do que um profissional de IHC deve saber, WCAG, W3C e e-MAG aparecem em qual área de conhecimento?",o:["Acessibilidade digital","Design de interfaces (UI)","Métricas de UX","Experiências imersivas"],e:"São as diretrizes de acessibilidade; a mesma área inclui tecnologias assistivas e inclusão de PcD nos testes."},
+ {d:"m",q:"Personas, mapas de empatia e análise da jornada do usuário fazem parte de qual conhecimento do profissional de IHC?",o:["Pesquisa com usuários","Acessibilidade digital","Habilidades técnicas em programação","Design para realidade aumentada"],e:"A pesquisa com usuários também inclui entrevistas, questionários e grupos focais."},
+ {d:"e",q:"Heatmaps, eye tracking, SUS e NPS são exemplos de:",o:["Análise de dados e métricas de UX","Ferramentas de prototipagem","Diretrizes de acessibilidade","Sistemas de design"],e:"São formas de medir como as pessoas usam e avaliam um produto."},
+ {d:"e",q:"Qual atividade avaliativa da disciplina tem o maior peso?",o:["Prova (P2), com 3,6 pontos","Projeto de documentação em IHC, com 2,0 pontos","Seminário com artigo científico, com 0,8 ponto","Inspeção de acessibilidade, com 0,8 ponto"],e:"Os projetos valem 2,0 cada; seminário e inspeções, 0,8; a oficina extra, 1,0."},
+ {d:"m",q:"Por que, segundo a aula, o profissional de IHC deve ter noções de HTML, CSS e JavaScript?",o:["Para entender a viabilidade técnica do que projeta","Para substituir a equipe de desenvolvimento","Porque a avaliação heurística exige código","Porque as WCAG só valem para JavaScript"],e:"Saber o que é possível construir evita propor designs inviáveis."}
+],
+"aula-1":[
+ {d:"m",q:"Na comparação entre a cédula de papel e a urna eletrônica, o que a aula quer mostrar?",o:["Que a mesma tarefa (votar) muda conforme a interface, e cada interface exige conhecimentos diferentes do eleitor","Que a urna eletrônica não tem nenhum problema de usabilidade","Que a cédula de papel não tinha interface","Que a tecnologia não altera a forma de realizar tarefas"],e:"Como votar, conferir o candidato, votar em branco ou nulo: cada interface responde a isso de um jeito."},
+ {d:"m",q:"Qual destes itens pertence ao objetivo de estudo “arquitetura de sistemas” (Hewett et al., 1992)?",o:["Dispositivos de entrada e saída, menus e formulários","Cultura e organização social","Memória, atenção e percepção","Métodos e ferramentas de desenvolvimento"],e:"Cultura é contexto de uso; memória é característica humana; métodos são processo de desenvolvimento."},
+ {d:"m",q:"Qual destes itens pertence ao objetivo de estudo “processo de desenvolvimento” (Hewett et al., 1992)?",o:["Abordagens, métodos, técnicas e ferramentas para construir interfaces","Visão, audição e capacidade de movimento","Uso do mouse e preenchimento de formulários","Linguagem e cultura do usuário"],e:"É o objetivo ligado a como a interface é projetada e construída."},
+ {d:"h",q:"A aula lista várias visões sobre um sistema interativo. Qual destas <strong>não</strong> aparece entre elas?",o:["Agência reguladora de telecomunicações","Fabricante de hardware","Profissionais de suporte","Produtores de conteúdo"],e:"As visões citadas são usuários, organizações, produtores de conteúdo, fabricantes de software e hardware, suporte, marketing e vendas, e provedores de acesso."},
+ {d:"e",q:"Para entender o “humano” em IHC, a aula propõe responder quais perguntas sobre o usuário?",o:["Quem? O quê? Quando? Como?","Quanto custa? Em quanto tempo?","Qual linguagem? Qual banco de dados?","Quantos servidores? Qual nuvem?"],e:"Além disso: interesses, objetivos, responsabilidades e atividades."},
+ {d:"e",q:"Por que a IHC é considerada uma área multidisciplinar?",o:["Porque usa conhecimentos e métodos de Psicologia, Sociologia, Design, Linguística e outras áreas, além da Computação","Porque envolve apenas programadores de diferentes linguagens","Porque cada sistema precisa de várias interfaces","Porque estuda vários tipos de hardware"],e:"Em grandes projetos, profissionais de formações diferentes trabalham juntos."},
+ {d:"m",q:"Segundo a aula, para que serve prever os impactos do próprio trabalho como desenvolvedor de TICs?",o:["Para encaminhar boas soluções e diminuir os impactos negativos previstos","Para aumentar o número de funcionalidades","Para reduzir o tamanho da equipe","Para dispensar testes com usuários"],e:"E, para o que não se consegue prever, fornecer salvaguardas."},
+ {d:"m",q:"Um app de banco mal projetado faz idosos errarem transferências e ligarem para o suporte. Quais benefícios de IHC estão sendo perdidos?",o:["Redução do número e da gravidade dos erros e redução do custo de suporte","Aumento da venda de hardware e redução de impostos","Velocidade do servidor e segurança da rede","Nenhum, pois o problema é do usuário"],e:"IHC contribui para menos erros, menos custo de treinamento e de suporte, mais produtividade e fidelidade."}
+],
+"aula-2":[
+ {d:"m",q:"Sobre a entrevista semiestruturada, é correto afirmar:",o:["Segue um roteiro de tópicos, mas permite aprofundar e mudar a ordem conforme a conversa","Não tem nenhum roteiro","Usa só perguntas fechadas, numa ordem fixa","É um questionário respondido online, sem entrevistador"],e:"A estruturada segue o roteiro à risca; a não estruturada é uma conversa livre."},
+ {d:"e",q:"A pergunta “Você costuma: ( ) lecionar na graduação ( ) orientar alunos de mestrado ( ) coordenar o curso” é:",o:["Uma pergunta fechada","Uma pergunta aberta","Uma escala de Likert","Um diferencial semântico"],e:"Oferece um conjunto predefinido de respostas."},
+ {d:"m",q:"Pedir ao usuário que marque sua posição entre “confuso” e “claro” numa escala é usar:",o:["Diferencial semântico","Escala de Likert","Pergunta aberta","Faixa de valores"],e:"O diferencial semântico usa pares de adjetivos opostos; o Likert mede concordância com uma frase."},
+ {d:"e",q:"Qual é a principal vantagem do estudo de campo em relação a uma coleta em laboratório?",o:["Captar o comportamento natural e o contexto real, com interrupções e distrações","Ser sempre mais barato","Dispensar a observação do pesquisador","Gerar dados estatísticos de muitas pessoas"],e:"Interrupções e demandas do ambiente real não são reproduzidas no laboratório."},
+ {d:"m",q:"A observação participante se diferencia da observação pura porque:",o:["O observador interage com os participantes","Não há observador presente","Acontece sempre em laboratório","Usa apenas questionários"],e:"Na observação pura o pesquisador só observa, sem interagir."},
+ {d:"m",q:"Qual é o primeiro passo da classificação de cartões?",o:["Decidir o que se quer descobrir","Analisar os resultados","Convidar os participantes","Conduzir a sessão"],e:"Depois: escolher o método, o conteúdo, os participantes, conduzir, analisar e usar os resultados."},
+ {d:"e",q:"Quais perguntas ajudam a identificar os stakeholders de um sistema?",o:["Quem vai usar, quem será afetado e quem decide os objetivos e funcionalidades","Qual linguagem de programação será usada","Quantos servidores serão necessários","Qual será a cor principal da interface"],e:"Stakeholders vão além dos usuários finais."},
+ {d:"e",q:"O que o TCLE deve garantir sobre os direitos do participante?",o:["Participar voluntariamente, sair a qualquer momento e pedir a exclusão dos seus dados","Ceder os direitos de imagem para sempre","Participar até o fim da pesquisa, sem desistência","Pagar uma taxa de inscrição"],e:"Também deve explicar como os dados serão usados e permitir revogar o consentimento sem prejuízo."},
+ {d:"h",q:"“Gravidade dos erros”, ou seja, as possíveis consequências de um erro do usuário, é um dado coletado sobre:",o:["As tarefas do usuário","Os dados demográficos","A relação com tecnologia","As motivações e valores"],e:"Faz parte do grupo de dados sobre tarefas, junto com objetivos, frequência e experiência no cargo."},
+ {d:"m",q:"“Alfabetismo computacional” e “anos de experiência com computadores” pertencem a qual grupo de dados do usuário?",o:["Relação com tecnologia","Conhecimento do domínio","Tarefas","Motivações e valores"],e:"O grupo também inclui experiência com produtos semelhantes e tecnologia disponível."},
+ {d:"m",q:"Na atividade de projeto, a turma colou post-its no quadro em silêncio e depois os agrupou por afinidade. Quais técnicas isso combina?",o:["Brainstorming e classificação de cartões por afinidade","Grupo de foco e teste de usabilidade","Entrevista estruturada e questionário","Percurso cognitivo e avaliação heurística"],e:"Ideias livres (brainstorming) organizadas por semelhança (cartões)."}
+],
+"aula-3":[
+ {d:"m",q:"Nas características de uma persona, o “status” indica se ela é:",o:["Primária, secundária ou outro stakeholder","Jovem, adulta ou idosa","De renda alta ou baixa","Administradora ou usuária comum do sistema"],e:"A persona primária é o foco principal do design."},
+ {d:"e",q:"Na persona João, a frase “Se eu puder resolver aqui do campo, melhor pra todo mundo” é um exemplo de:",o:["Citação representativa","Critério de aceitação","Evento do cenário","Subtarefa"],e:"Frases típicas ajudam a equipe a lembrar o modo de pensar da persona."},
+ {d:"m",q:"Em um cenário, as “ações” são:",o:["O comportamento observável dos atores","A atividade mental de planejar","As reações produzidas pelo computador","Os detalhes do ambiente"],e:"Planejamento e avaliação são atividades mentais; eventos são reações externas."},
+ {d:"m",q:"Qual elemento do cenário corresponde às reações produzidas pelo computador ou por fatores do ambiente?",o:["Eventos","Ações","Objetivos","Atores"],e:"Ex.: o sistema mostra uma mensagem; o sinal de internet cai."},
+ {d:"e",q:"Na história de usuário com elementos de IHC, “emoções esperadas” descreve:",o:["Como o usuário deve se sentir ao usar a funcionalidade","As tarefas que o sistema executa","Os dados que o banco armazena","O custo da funcionalidade"],e:"No exemplo da aula: confiança, agilidade e alívio."},
+ {d:"h",q:"Na análise de tarefas “Registrar ocorrência”, a subtarefa “2.3 Selecionar manualmente, se necessário” mostra que a análise de tarefas também registra:",o:["Decisões e caminhos alternativos","Emoções do usuário","Dados demográficos","Critérios das WCAG"],e:"A análise identifica passos, decisões, ferramentas, dificuldades e sequência."},
+ {d:"e",q:"Segundo a aula, qual é o resultado da atividade de análise?",o:["O designer entende quem é o usuário, o que precisa fazer, de quais maneiras e por quê","O código da primeira versão","O protótipo de alta fidelidade","O relatório de testes de usabilidade"],e:"Esse aprendizado é registrado em perfis, personas, cenários, histórias e modelos de tarefas."},
+ {d:"m",q:"Um perfil de usuário que separa “compradores” e “vendedores” usou qual critério de agrupamento?",o:["Tarefas principais","Idade","Atitude perante a tecnologia","Nível de experiência"],e:"Outros critérios possíveis: idade, experiência e atitudes."}
+],
+"aula-4":[
+ {d:"e",q:"Na situação típica de uso, o contexto de uso inclui:",o:["Tempo e ambiente físico, social e cultural","Apenas o hardware do usuário","O código-fonte do sistema","Os requisitos funcionais"],e:"O usuário interage com o sistema pela interface, sempre dentro de um contexto."},
+ {d:"m",q:"Na perspectiva de mídia (Kammersgaard, 1988), o computador é visto como:",o:["Meio de comunicação entre pessoas","Instrumento para produzir um trabalho","Parceiro com quem se conversa","Parte de um sistema que troca dados"],e:"Ex.: e-mail e redes sociais, onde o computador conecta pessoas."},
+ {d:"m",q:"Na perspectiva de ferramenta (Kammersgaard, 1988), o computador é:",o:["Um instrumento que o usuário usa para produzir um trabalho ou produto","Uma pessoa com quem se conversa","Um meio de falar com outras pessoas","Um sistema em que o usuário é só mais uma peça"],e:"Ex.: um editor de texto ou de imagens."},
+ {d:"m",q:"Segundo a aula, a comunicabilidade permite que os usuários:",o:["Tirem melhor proveito do sistema por entenderem as estratégias de uso adequadas","Programem novas funções","Dispensem qualquer ajuda","Usem o sistema sem interface"],e:"É a capacidade da interface de comunicar a lógica do design."},
+ {d:"e",q:"Por que se recomenda combinar ícone e texto, como no botão “Imprimir”?",o:["Porque o texto elimina a ambiguidade que o ícone sozinho pode ter","Porque ícones são proibidos pelas WCAG","Porque o texto deixa o botão mais bonito","Porque o estilo WIMP exige"],e:"Ícone com rótulo também atende a “reconhecimento em vez de memorização”."},
+ {d:"e",q:"Um terminal em que o usuário digita “ls -la” exemplifica qual estilo de interação?",o:["Linguagem de comando","WIMP","Linguagem natural","Interface móvel por toque"],e:"O usuário precisa conhecer e digitar os comandos."},
+ {d:"e",q:"Uma assistente de voz que entende “me lembra de pagar a conta amanhã” usa qual estilo de interação?",o:["Linguagem natural","Linguagem de comando","WIMP","Manipulação direta"],e:"O usuário fala como falaria com outra pessoa."},
+ {d:"e",q:"Por que o protótipo de baixa fidelidade é usado no início do projeto?",o:["Porque é barato, rápido, foca na estrutura e pode ser descartado","Porque já tem as cores finais","Porque permite testar desempenho","Porque é escrito na linguagem final"],e:"Serve para entender requisitos antes de investir em detalhes."},
+ {d:"m",q:"A equipe quer aprovar com o cliente cores, fontes e identidade visual antes de programar, sem precisar de interação. Qual artefato usar?",o:["Mockup","Wireframe","Protótipo de alta fidelidade","Mapa da jornada do usuário"],e:"O mockup mostra a aparência final de forma estática."},
+ {d:"m",q:"Sobre metáforas na interface, é correto afirmar:",o:["Só funcionam se o usuário conhece a referência, por isso o contexto cultural importa","Sempre melhoram a usabilidade","São usadas apenas em jogos","Devem ser evitadas em qualquer sistema"],e:"O disquete como “salvar” é um exemplo de metáfora cuja referência muitos jovens não conhecem."}
+],
+"aula-5":[
+ {g:1,d:"e",q:"Uma barra de navegação com itens alinhados e espaços iguais dos dois lados transmite equilíbrio e organização. Qual princípio da Gestalt é aplicado?",o:["Simetria","Fecho","Destino comum","Similaridade"],e:"Objetos simétricos são percebidos mais prontamente."},
+ {g:1,d:"e",q:"Num formulário, “Nome”, “CPF” e “E-mail” ficam juntos, separados por um espaço maior de “Rua”, “Número” e “CEP”. O usuário enxerga dois blocos. Qual princípio da Gestalt é esse?",o:["Proximidade","Simetria","Fecho","Boa continuidade"],e:"Elementos próximos são percebidos como um grupo."},
+ {g:1,d:"m",q:"Uma linha do tempo com pontos ligados por uma linha contínua faz o olho seguir os eventos em ordem. Qual princípio da Gestalt é aplicado?",o:["Boa continuidade","Proximidade","Similaridade","Fecho"],e:"Traços contínuos são percebidos mais facilmente que contornos que mudam de direção."},
+ {g:1,d:"e",q:"Em todas as telas, os botões principais são azuis e os secundários cinza, e o usuário entende quais têm a mesma função. Qual princípio da Gestalt é esse?",o:["Similaridade","Destino comum","Simetria","Fecho"],e:"Objetos semelhantes são percebidos como um grupo."},
+ {g:1,d:"e",q:"Qual frase define corretamente a Gestalt?",o:["Escola alemã de psicologia que estuda como percebemos padrões e formas","Método de avaliação de usabilidade criado por Nielsen","Norma ISO de ergonomia de software","Lei matemática sobre tempo de decisão"],e:"Fundada por Wertheimer, Köhler e Koffka."},
+ {g:1,d:"m",q:"Um logotipo formado por vários pontinhos separados é percebido como um círculo completo. Qual princípio da Gestalt explica isso?",o:["Fecho","Proximidade","Destino comum","Simetria"],e:"A mente completa as falhas para formar uma figura regular."},
+ {d:"h",q:"Pela lei de Hick-Hyman (k = 150 ms), quanto tempo leva a decisão entre 3 opções equiprováveis?",o:["300 ms","450 ms","150 ms","600 ms"],e:"T = 150 · log₂(3 + 1) = 150 · log₂ 4 = 150 · 2 = 300 ms."},
+ {d:"h",q:"Pela lei de Hick-Hyman (k = 150 ms), reduzir um menu de 15 para 7 opções equiprováveis muda o tempo de decisão de:",o:["600 ms para 450 ms","15 s para 7 s","450 ms para 150 ms","2.250 ms para 1.050 ms"],e:"150 · log₂ 16 = 600 ms; 150 · log₂ 8 = 450 ms."},
+ {d:"h",q:"Pela lei de Fitts (k = 100 ms), qual o tempo para alcançar um alvo de tamanho S = 2 a uma distância D = 15?",o:["300 ms","750 ms","200 ms","150 ms"],e:"T = 100 · log₂(15/2 + 0,5) = 100 · log₂ 8 = 300 ms."},
+ {d:"h",q:"Pela lei de Fitts, dobrar a distância até um botão, sem mudar o tamanho dele, faz o tempo para alcançá-lo:",o:["Aumentar, mas não dobrar, porque cresce de forma logarítmica","Dobrar exatamente","Diminuir","Não mudar"],e:"O tempo depende de log₂(D/S + 0,5)."},
+ {d:"m",q:"Qual diretriz para smartphones decorre da lei de Fitts?",o:["Colocar as ações principais em regiões centrais ou inferiores da tela","Colocar as ações principais nos cantos superiores","Diminuir os botões para caber mais opções","Afastar botões usados em sequência"],e:"Áreas superiores do celular são menos alcançáveis com o polegar."},
+ {d:"m",q:"O que é “progressive disclosure”, uma das diretrizes ligadas à lei de Miller?",o:["Revelar os detalhes aos poucos, mostrando primeiro o essencial","Mostrar todas as opções de uma vez","Esconder o menu principal","Exibir mensagens de erro em sequência"],e:"Reduz a quantidade de informação que a memória de trabalho precisa reter."},
+ {d:"e",q:"Na definição de usabilidade da ISO 9241-11, o “contexto de uso” inclui:",o:["As características dos usuários, as tarefas e o ambiente físico e tecnológico","Apenas o hardware usado","Apenas o preço do produto","O código-fonte do sistema"],e:"Por isso não se fala de usabilidade sem dizer para quem e em que situação."},
+ {d:"m",q:"Um sistema com letras grandes para idosos e compatível com leitores de tela leva em conta qual elemento da definição de usabilidade?",o:["Contexto de uso","Eficiência","Lei de Fitts","Princípio do fecho"],e:"É o exemplo dado em aula para contexto de uso."},
+ {d:"m",q:"Ao definir uma cor digitando valores RGB sem nenhuma pré-visualização, que dificuldade da engenharia cognitiva aparece por não se ver a cor?",o:["Dificuldade de avaliação","Dificuldade de mapeamento apenas","Lei de Hick-Hyman","Falsa affordance"],e:"O usuário não consegue verificar se chegou ao resultado desejado."},
+ {d:"m",q:"Na teoria da ação de Norman, a etapa de “percepção” é quando o usuário:",o:["Nota a mudança no estado do sistema, como uma janela que se abriu","Decide o que quer alcançar","Escolhe a sequência de ações","Clica no botão"],e:"Depois vêm a interpretação (o que significa) e a avaliação (cheguei mais perto?)."}
+],
+"aula-6":[
+ {d:"e",q:"Um site de compras mostra “Seu pedido está sendo processado: etapa 2 de 3”. Qual heurística de Nielsen ele atende?",o:["Visibilidade do estado do sistema","Prevenção de erros","Ajuda e documentação","Projeto estético e minimalista"],e:"O usuário sabe o que está acontecendo e quanto falta."},
+ {d:"e",q:"Um app de banco usa “Débito automático” em vez de “Agendamento recorrente de transação via API”. Qual heurística ele atende?",o:["Correspondência entre o sistema e o mundo real","Flexibilidade e eficiência de uso","Controle e liberdade do usuário","Visibilidade do estado do sistema"],e:"Usa palavras familiares ao usuário, não jargão técnico."},
+ {d:"e",q:"O botão “Salvar” fica sempre no mesmo lugar, como nos outros apps da plataforma. Qual heurística isso atende?",o:["Consistência e padronização","Ajuda e documentação","Prevenção de erros","Flexibilidade e eficiência de uso"],e:"Seguir as convenções da plataforma evita que o usuário procure a função."},
+ {d:"m",q:"Um formulário avisa “Este e-mail já está cadastrado” enquanto o usuário digita, antes de enviar. Qual heurística está mais relacionada?",o:["Prevenção de erros","Ajuda e documentação","Projeto estético e minimalista","Controle e liberdade do usuário"],e:"O problema é evitado antes de acontecer."},
+ {d:"m",q:"Um editor permite que usuários experientes digitem comandos como “/tabela”, enquanto novatos usam os menus. Qual heurística isso atende?",o:["Flexibilidade e eficiência de uso","Consistência e padronização","Visibilidade do estado do sistema","Correspondência com o mundo real"],e:"Aceleradores servem os experientes sem atrapalhar os novatos."},
+ {d:"e",q:"Uma tela de login com três banners, dois pop-ups e notícias em volta do campo de senha viola principalmente:",o:["Projeto estético e minimalista","Prevenção de erros","Ajuda e documentação","Controle e liberdade do usuário"],e:"Cada informação extra compete pela atenção do usuário."},
+ {d:"e",q:"Uma central de ajuda com busca e artigos curtos, passo a passo, focados na tarefa atende a qual heurística?",o:["Ajuda e documentação","Visibilidade do estado do sistema","Consistência e padronização","Reconhecimento em vez de memorização"],e:"A ajuda deve ser fácil de achar, focada na tarefa e não muito extensa."},
+ {d:"m",q:"A mensagem “Não foi possível pagar: o cartão expirou em 03/2026. Use outro cartão ou atualize a validade.” atende a qual heurística?",o:["Ajudar os usuários a reconhecer, diagnosticar e se recuperar de erros","Prevenção de erros","Projeto estético e minimalista","Flexibilidade e eficiência de uso"],e:"Linguagem simples, problema preciso e solução construtiva."},
+ {d:"m",q:"Ao avaliar a severidade de um problema, o fator “persistência” indica:",o:["Se o problema acontece uma vez e é superado ou se atrapalha o usuário repetidas vezes","Quantos usuários são afetados","Quanto custa corrigir","Em quantas telas o problema aparece"],e:"Os outros fatores são frequência e impacto."},
+ {d:"m",q:"Um problema raro, fácil de contornar e que só aparece uma vez deve ser classificado, provavelmente, como:",o:["Cosmético ou pequeno","Catastrófico","Grande","Não deve ser relatado"],e:"A severidade combina frequência, impacto e persistência; aqui os três são baixos."},
+ {d:"m",q:"No relato de um problema da avaliação heurística, qual item <strong>não</strong> é pedido pela aula?",o:["O nome do usuário que encontrou o problema","A heurística violada","O local do problema","A gravidade do problema"],e:"A avaliação heurística nem envolve usuários. Pede-se heurística, local, gravidade, justificativa e, se possível, solução."},
+ {d:"m",q:"Por que a avaliação heurística combina bem com um processo de design iterativo?",o:["Porque é simples, rápida e barata, e pode ser repetida a cada nova versão","Porque exige muitos usuários","Porque só pode ser feita no fim do projeto","Porque gera resultados estatísticos"],e:"Foi criada para achar problemas durante o design."},
+ {d:"h",q:"Na inspeção do app Melhor Peso feita em aula, o app não aceita data de nascimento anterior a 2014, impedindo adultos de completar o perfil. O avaliador classificou como “grande” com base em quê?",o:["Na frequência, no impacto e na persistência do problema","Na cor do botão de data","No número de telas do app","Na opinião do desenvolvedor"],e:"O relato justificou a severidade pelos três fatores de Nielsen."},
+ {d:"e",q:"O usuário clica em “Funcionamento” e abre uma janela chamada “Atendimento”. Qual seria a correção?",o:["Usar o mesmo nome no item de menu e no título da janela","Adicionar um tutorial em vídeo","Aumentar a fonte do menu","Remover o menu"],e:"Corrige a violação de consistência e padronização."}
+],
+"aula-7":[
+ {d:"e",q:"Num teste de usabilidade, para que serve gravar a sessão?",o:["Para rever depois o comportamento, os erros e as falas do participante","Para cumprir as WCAG","Para substituir o TCLE","Para dispensar o piloto"],e:"Gravação e observação são as formas de coletar dados citadas no planejamento."},
+ {d:"m",q:"Qual é a ordem correta do início do planejamento de um teste de usabilidade?",o:["Texto introdutório → objetivo → questões de pesquisa → perfil do usuário → tarefas","Tarefas → execução → objetivo → perfil","Relato → consolidação → piloto → objetivo","Perfil → relato → tarefas → objetivo"],e:"Depois: medidas, forma de coleta, piloto, execução, consolidação e relato."},
+ {d:"e",q:"No plano de teste, “Qual interface (Amazon ou Mercado Livre) oferece melhor usabilidade para comprar a panela mais barata?” é:",o:["A questão de pesquisa","Uma tarefa","Uma medida de eficiência","O perfil do usuário"],e:"A tarefa seria “encontre e compre a panela mais barata com menor prazo”."},
+ {d:"m",q:"Num teste, o “número de páginas visitadas até encontrar o produto” mede:",o:["Eficiência","Eficácia","Satisfação","Contexto de uso"],e:"É o esforço gasto para atingir o objetivo."},
+ {d:"m",q:"Num teste, a quantidade de participantes que compraram o produto errado mede principalmente:",o:["Eficácia","Eficiência","Satisfação","Persistência"],e:"Eficácia é atingir o objetivo com precisão; comprar errado é um erro de eficácia."},
+ {d:"m",q:"Comentários espontâneos como “nossa, que confuso” durante um teste são evidência de qual atributo?",o:["Satisfação","Eficiência","Eficácia","Acessibilidade"],e:"Frustrações e comentários positivos ou negativos indicam a satisfação."},
+ {d:"e",q:"O percurso cognitivo é motivado principalmente por qual observação sobre os usuários?",o:["Muitas pessoas preferem aprender fazendo, em vez de ler manuais ou fazer treinamentos","Usuários sempre leem o manual antes de usar","Usuários só usam sistemas depois de treinados","Usuários preferem linha de comando"],e:"Por isso ele avalia a facilidade de aprendizado por exploração."},
+ {d:"h",q:"Qual método é mais indicado para descobrir se um usuário novato, sem treinamento, consegue descobrir sozinho como emitir a segunda via de um boleto?",o:["Percurso cognitivo","Classificação de cartões","Grupo de foco","Brainstorming"],e:"O percurso cognitivo avalia exatamente a facilidade de aprender explorando a interface."}
+],
+"aula-8":[
+ {d:"h",q:"Uma imagem puramente decorativa (um enfeite sem informação) deve receber qual texto alternativo?",o:["Atributo alt vazio (alt=\"\"), para o leitor de tela ignorá-la","alt=\"imagem\"","Uma descrição longa da imagem","Nenhum atributo alt"],e:"O 1.1.1 pede alternativa para conteúdo relevante; o enfeite deve ser ignorado pela tecnologia assistiva."},
+ {d:"m",q:"Um site abre com um vídeo tocando som por 30 segundos, sem botão de pausar ou silenciar. Qual critério é violado?",o:["1.4.2 Controle de áudio","2.3.1 Três flashes","3.1.1 Idioma da página","2.4.2 Página com título"],e:"Áudio automático por mais de 3 s precisa de forma simples de pausar, silenciar ou ajustar o volume."},
+ {d:"m",q:"A sessão de um sistema expira em 2 minutos, sem aviso e sem opção de estender, e a tarefa não exige esse limite. Qual critério é violado?",o:["2.2.1 Ajustável por limite de tempo","1.4.3 Contraste","2.4.3 Ordem do foco","1.2.2 Legendas"],e:"Limite de tempo não essencial deve poder ser desligado ou ampliado."},
+ {d:"m",q:"Um podcast publicado apenas em áudio, sem transcrição, viola qual critério?",o:["1.2.1 Apenas áudio ou apenas vídeo (pré-gravado)","1.4.1 Uso de cor","2.1.1 Teclado","3.3.1 Identificação do erro"],e:"Conteúdo só em áudio precisa de transcrição em texto."},
+ {d:"h",q:"Um formulário em etapas pede o CPF na etapa 1 e de novo na etapa 3, sem necessidade. Qual critério é violado?",o:["3.3.7 Entrada redundante","3.3.3 Sugestão de erro","1.3.2 Sequência com significado","2.4.6 Cabeçalhos e rótulos"],e:"Um dado já informado deve ser solicitado só uma vez no processo, salvo quando essencial."},
+ {d:"h",q:"Uma tela de login bloqueia colar a senha, sem justificativa. Qual critério é violado?",o:["3.3.8 Autenticação acessível","2.2.5 Nova autenticação","1.4.4 Redimensionar texto","3.2.4 Identificação consistente"],e:"Recursos que facilitam digitar a senha não devem ser removidos sem razão (WCAG 2.2)."},
+ {d:"m",q:"O campo de busca fica no topo em uma página e no rodapé em outra do mesmo site. Qual critério é violado?",o:["3.2.3 Navegação consistente","2.4.8 Localização","1.3.5 Identificar o objetivo de entrada","2.5.7 Movimentos de arrastar"],e:"Elementos repetidos devem manter posição e forma entre as páginas."},
+ {d:"h",q:"Um tooltip some assim que o usuário tenta mover o mouse até ele para ler. Qual condição do critério 1.4.13 é violada?",o:["Ser pairável (o usuário pode mover o ponteiro sobre o conteúdo)","Ter contraste de 4.5:1","Declarar o idioma","Ter legenda"],e:"O 1.4.13 pede conteúdo em hover ou foco dispensável, pairável e persistente."},
+ {d:"m",q:"Um breadcrumb (“Início › Hardware › SSD”) atende a qual critério?",o:["2.4.8 Localização","2.3.1 Três flashes","1.2.2 Legendas","3.3.7 Entrada redundante"],e:"Ajuda o usuário a saber onde está no site (nível AAA)."},
+ {d:"m",q:"Navegando com Tab, o foco pula do topo para o rodapé e depois volta ao meio da página. Qual critério é violado?",o:["2.4.3 Ordem do foco","1.4.3 Contraste","2.2.2 Pausar, parar ou ocultar","3.1.5 Nível de leitura"],e:"A ordem do foco deve ser sequencial e lógica."},
+ {d:"e",q:"Todas as páginas de um sistema têm o mesmo título na aba: “Sistema”. Qual critério é violado?",o:["2.4.2 Página com título","1.1.1 Conteúdo não textual","2.5.8 Tamanho da área acionável","3.3.4 Prevenção de erro"],e:"Cada tela deve ter um título que descreva sua finalidade."},
+ {d:"h",q:"Um texto de 18 pt tem contraste de 3,5:1 com o fundo. No nível AA, ele:",o:["Atende, porque texto grande exige no mínimo 3:1","Não atende, porque todo texto exige 4.5:1","Só atende no nível AAA","Não precisa de contraste"],e:"Texto de 18 pt ou 14 pt negrito pode ter 3:1; texto normal precisa de 4.5:1."},
+ {d:"e",q:"Qual princípio das WCAG reúne texto alternativo, legendas e contraste?",o:["Perceptível","Operável","Compreensível","Robusto"],e:"São formas de garantir que a informação possa ser percebida."},
+ {d:"e",q:"Qual princípio das WCAG reúne navegação por teclado, tempo suficiente e foco visível?",o:["Operável","Perceptível","Compreensível","Robusto"],e:"Os componentes e a navegação precisam ser utilizáveis."},
+ {d:"e",q:"Qual princípio das WCAG reúne linguagem clara, mensagens de erro úteis e consistência entre páginas?",o:["Compreensível","Robusto","Perceptível","Operável"],e:"A informação e a operação precisam ser entendidas."},
+ {nw:1,d:"m",q:"Qual ferramenta, citada na aula, faz inspeção de acessibilidade pela aba do DevTools do Chrome (F12)?",o:["Lighthouse","NVDA","JAWS","TalkBack"],e:"NVDA, JAWS e TalkBack são leitores de tela. A outra ferramenta de inspeção citada é a extensão WAVE."}
+],
+"artigo":[
+ {d:"e",q:A1P+" quantas pessoas idosas foram convidadas para os workshops?",o:["9","30","478","15"],e:"Compareceram 8 no primeiro encontro, 9 no segundo e 8 no teste de usabilidade."},
+ {d:"e",q:A1P+" qual percentual da população brasileira com 65 anos ou mais (IBGE, 2022) os autores citam?",o:["10,9%","50%","2%","30%"],e:"O dado mostra a relevância de projetar para esse público."},
+ {d:"m",q:A1P+" o trabalho se alinha a qual grande desafio de pesquisa em IHC no Brasil?",o:["O GC4 do GranDIHC-BR, sobre aspectos socioculturais em IHC","A norma ISO 9241-11","A Lei Geral de Proteção de Dados","A lei de Fitts"],e:"O objetivo é facilitar o letramento digital das pessoas idosas."},
+ {d:"m",q:A1P+" qual era a ideia das telas de “simulação” do protótipo?",o:["Praticar o uso de apps como Uber, iFood e criação de e-mail num ambiente seguro, com ou sem instruções","Jogar partidas online contra outros idosos","Fazer compras reais com cartão de crédito","Programar novos aplicativos"],e:"O modo iniciante tem balões de instrução; o avançado, não."},
+ {d:"m",q:A1P+" o que o Grupo 2 incluiu no seu protótipo de papel que o Grupo 1 explorou menos?",o:["Zoom da tela para ampliar letras e imagens e um fundo verde-claro","Login por reconhecimento facial","Um jogo de perguntas","Uma área de compras online"],e:"Os dois grupos pensaram em áudio, mas o Grupo 2 explorou mais o zoom e as cores."},
+ {d:"m",q:A1P+" qual tema de interesse foi o mais citado pelos participantes?",o:["Financeiro","Jogos","Redes sociais","Programação"],e:"Os interesses foram financeiro, saúde, documentação, segurança e organização."},
+ {d:"m",q:A1P+" por que as dificuldades de letramento chamaram a atenção dos autores?",o:["Quase todas envolvem privacidade e segurança de dados pessoais e bancários","Todas eram resolvidas com contraste de cores","Nenhum participante tinha celular","Eram problemas de velocidade da internet"],e:"Reforça Balki et al. (2023) e Jokisch et al. (2022) sobre o receio com privacidade."},
+ {d:"m",q:A1P+" que dificuldade os pesquisadores relatam na atividade de design participativo?",o:["Os participantes demoravam a entender o que desenhar e pediam “dicas” sobre o que os pesquisadores queriam","Os participantes se recusaram a desenhar","Faltou papel para os protótipos","O Figma não abriu"],e:"Por isso foi feita antes uma introdução sobre design, cores e tipos de protótipo."},
+ {d:"h",q:A1P+" o que os autores pretendem mudar nos próximos testes de usabilidade?",o:["Testar num sistema real, não no Figma, e reduzir o tempo dos questionários SUS e SAM","Parar de usar questionários","Testar apenas com jovens","Remover as simulações"],e:"As notas mais baixas foram atribuídas às limitações do Figma e a falhas durante os testes."},
+ {d:"e",q:A1P+" o que os autores concluem sobre incluir as pessoas idosas no processo de design?",o:["Mostra que a opinião delas é a mais importante e que não se deve subestimar sua capacidade de aprender","Que idosos não conseguem participar do design","Que só o teste final deve envolver idosos","Que o design participativo não funciona"],e:"O mesmo grupo será convidado para as próximas etapas."}
+],
+"art-duolingo":[
+ {d:"e",q:DUP+" qual percentual de crianças e adolescentes brasileiros de 9 a 17 anos usava a internet em 2022, segundo os dados citados?",o:["92%, cerca de 24,4 milhões de pessoas","10%","50%","100%"],e:"O dado mostra o tamanho do público infantil exposto ao design das plataformas."},
+ {d:"m",q:DUP+" qual era a hipótese inicial dos pesquisadores?",o:["Que o Duolingo não usava práticas de design manipulativas de forma intencional","Que o Duolingo era o app mais manipulador do mundo","Que crianças não usavam o Duolingo","Que o app não tinha gamificação"],e:"A hipótese foi testada no uso exploratório de 10 dias."},
+ {d:"e",q:DUP+" por que as “ofensivas” (sequências de dias seguidos de estudo) foram vistas como problemáticas?",o:["Criam pressão constante e medo de perder a sequência, o que pode gerar ansiedade","Porque são difíceis de encontrar","Porque custam dinheiro","Porque não aparecem para crianças"],e:"É a “pressão amigável” citada pelos autores."},
+ {d:"m",q:DUP+" como funcionam as “vidas” que acabam a cada erro?",o:["Como punição e pausa por errar, pressionando o usuário","Como recompensa por acertar","Como um tutorial","Como ajuda contextual"],e:"Faz parte das estratégias de gamificação analisadas."},
+ {d:"h",q:DUP+" qual documento internacional sobre direitos das crianças no ambiente digital é citado?",o:["O Comentário Geral nº 25 do Comitê dos Direitos da Criança da ONU","A norma ISO 9241-210","As WCAG 2.2","O Manifesto Ágil"],e:"No Brasil, também são citados o Art. 227 da Constituição e o ECA."},
+ {d:"m",q:DUP+" por que as crianças são especialmente vulneráveis aos dark patterns?",o:["Têm letramento digital limitado e estão em desenvolvimento emocional e cognitivo","Porque usam apenas computadores","Porque não sabem ler","Porque o app é pago"],e:"São menos conscientes de como seus dados e atenção são explorados."},
+ {d:"e",q:DUP+" qual frase resume a conclusão do estudo?",o:["Há uma linha tênue entre motivação e manipulação","O Duolingo é totalmente ético","Gamificação deve ser proibida","Crianças não devem aprender idiomas por app"],e:"A forma de aplicar repetição, urgência e apelo emocional decide de que lado o design fica."},
+ {d:"h",q:DUP+" por não terem feito testes nem entrevistas com usuários, os autores reconhecem uma ameaça a qual tipo de validade?",o:["Validade externa, ou seja, a generalização dos achados","Validade de contraste","Validade da lei de Fitts","Validade do TCLE"],e:"Também citam a amostra curta de 10 dias e o risco de viés dos autores."}
+],
+"art-dark":[
+ {d:"m",q:DKP+" de onde vieram os exemplos usados para refinar as definições dos 13 dark patterns?",o:["De fóruns de comunidades de jogadores","De entrevistas com desenvolvedores","Das WCAG","Das lojas de aplicativos"],e:"As definições vieram da literatura e os exemplos, das comunidades."},
+ {d:"e",q:DKP+" o que é um Pay Wall?",o:["Obrigar o jogador a pagar para continuar progredindo","Uma parede decorativa no cenário","Um tutorial obrigatório","Um ranking entre amigos"],e:"Foi o padrão considerado mais nocivo."},
+ {d:"m",q:DKP+" por que as loot boxes são criticadas pelos participantes?",o:["Usam mecânicas de probabilidade parecidas com apostas e tornam a monetização opaca","Porque são caixas sem conteúdo","Porque deixam o jogo mais fácil","Porque só aparecem no fim do jogo"],e:"Um participante descreveu como um sistema que explora jogadores vulneráveis a apostas."},
+ {d:"m",q:DKP+" os dark patterns de capital social exploram:",o:["As relações sociais, como a pressão ou a obrigação de jogar com amigos","O dinheiro do jogador","O tempo de carregamento do jogo","A qualidade gráfica"],e:"Temporais exploram o tempo; monetários, o dinheiro."},
+ {d:"m",q:DKP+" quantos e quais rankings os autores geraram?",o:["Três: nocividade, natureza problemática e prevalência","Um: preço dos jogos","Dois: gráficos e som","Quatro: idade, gênero, renda e escolaridade"],e:"Cada ranking ordena os 13 padrões."},
+ {d:"e",q:DKP+" com que finalidade os dark patterns são aplicados nos jogos, segundo os autores?",o:["Aumentar retenção, engajamento ou monetização, muitas vezes à custa do jogador","Melhorar a acessibilidade","Ensinar programação","Reduzir o tempo de jogo"],e:"Não são acidentais: são implementados de propósito."},
+ {d:"m",q:DKP+" qual trabalho futuro os autores sugerem?",o:["Aumentar a amostra, estudar fatores culturais e demográficos e fazer estudos longitudinais","Proibir todos os jogos online","Criar um novo jogo","Repetir o estudo só com desenvolvedores"],e:"Estudos longitudinais mostrariam como a percepção muda com o tempo."}
+],
+"art-jogos":[
+ {d:"e",q:JGP+" segundo Dörner et al. (2016), citados pelos autores, jogos sérios são desenvolvidos para:",o:["Divertir e atingir um objetivo específico, geralmente a aprendizagem do jogador","Apenas entreter","Apenas vender produtos","Testar hardware"],e:"Podem ser usados no estudo autodidata ou para complementar o ensino."},
+ {d:"m",q:JGP+" quais são os cinco fatores de usabilidade de Nielsen (1993) citados?",o:["Facilidade de aprendizado, facilidade de recordação, eficiência, segurança no uso e satisfação","Perceptível, operável, compreensível, robusto e acessível","Proximidade, similaridade, simetria, fecho e continuidade","Análise, design, avaliação, implementação e manutenção"],e:"Os mecanismos de usabilidade de Juristo buscam atingir esses fatores."},
+ {d:"m",q:JGP+" de quem vêm as características funcionais de usabilidade (FUFs) usadas como base da avaliação?",o:["Juristo et al. (2007)","Zagal et al. (2013)","Hick e Hyman","W3C"],e:"Sete características que se desdobram em até 15 mecanismos de usabilidade."},
+ {d:"m",q:JGP+" qual característica de usabilidade foi a menos implementada nos jogos?",o:["Perfil de usuário","Cancelar/Desfazer","Feedback","Tutoriais"],e:"Cancelar/Desfazer foi a mais implementada."},
+ {d:"m",q:JGP+" qual foi o destaque do MACteaching?",o:["Feedback contínuo ao jogador","Tutoriais em todo o fluxo","Cancelar ações acidentais","Perfil de usuário completo"],e:"O UsabilityGame se destacou em cancelar/desfazer, e o UsabiliCity em tutoriais."},
+ {d:"m",q:JGP+" qual foi o destaque do UsabiliCity?",o:["Tutoriais disponíveis em todo o fluxo do jogo","Feedback contínuo","Cancelar ações acidentais","Kappa de Cohen mais alto"],e:"Mesmo assim, foi o que implementou o menor percentual (52,6%)."},
+ {d:"h",q:JGP+" que método de avaliação de IHC o jogo MACteaching ensina?",o:["O MAC, método de avaliação de comunicabilidade da engenharia semiótica","A avaliação heurística de Nielsen","O teste A/B","A classificação de cartões"],e:"MAC = Método de Avaliação de Comunicabilidade."}
+],
+"art-gomez":[
+ {d:"m",q:GOP+" em quais bases de dados a busca foi feita?",o:["Web of Science, Scopus e IEEE","Google e Bing","Apenas no Google Scholar","Nas lojas de aplicativos"],e:"Foram considerados artigos de 2010 a 2021, revisados por pares."},
+ {d:"e",q:GOP+" quantos estudos foram incluídos no fim da triagem?",o:["40","4.168","3.279","27"],e:"4.168 encontrados, 3.279 sem duplicatas, 40 incluídos, 27 recomendações."},
+ {d:"h",q:GOP+" quais recomendações ficaram de fora na análise temática?",o:["As citadas por um só estudo ou sem base em teste com usuários","As que tratavam de cores","As que vieram de estudos de saúde","As mais citadas"],e:"Só ficaram recomendações com evidência de testes de usabilidade."},
+ {d:"e",q:GOP+" qual recomendação da categoria ajuda e treinamento é destacada?",o:["Preferir tutoriais em vídeo a instruções escritas","Eliminar toda ajuda","Usar apenas manuais impressos","Exigir treinamento presencial"],e:"Vídeo foi a forma preferida pelos idosos nos estudos."},
+ {d:"m",q:GOP+" o que é recomendado na categoria interação?",o:["Preferir o toque simples a gestos como pinçar ou deslizar, e dar retorno claro após cada toque","Usar só comandos de voz","Usar gestos complexos para economizar espaço","Esconder os botões"],e:"Gestos complexos são difíceis para quem tem menos precisão de movimento."},
+ {d:"e",q:GOP+" qual exemplo é dado para a categoria carga cognitiva?",o:["Usar linguagem simples, familiar e sem ambiguidade","Usar o máximo de opções por tela","Usar jargão técnico","Trocar o idioma do app"],e:"Combina com a lei de Miller e com a heurística de correspondência com o mundo real."},
+ {d:"m",q:GOP+" qual problema motivou o estudo?",o:["As recomendações existentes eram confusas, às vezes contraditórias, e muitas não vinham de testes com usuários","Não havia nenhum app para idosos","Os idosos não usam celular","As WCAG proíbem apps para idosos"],e:"O objetivo foi reunir diretrizes comprovadas em testes de usabilidade."},
+ {d:"m",q:GOP+" qual dado sobre smartphones entre americanos com mais de 65 anos é citado?",o:["A posse subiu de 18% em 2013 para 42% em 2017","Caiu de 90% para 10%","Sempre foi 100%","Ficou estável em 50%"],e:"Dado do Pew Research Center."}
+],
+"art-xr":[
+ {d:"m",q:XRP+" como o CognitiveEMS ajuda os paramédicos?",o:["Mostra nos óculos o próximo passo do protocolo ou a dose do medicamento, sem exigir comandos manuais","Dirige a ambulância sozinho","Substitui o paramédico","Liga automaticamente para o hospital"],e:"Ele cruza fala, imagem e sinais vitais em tempo real (pilar situacional)."},
+ {d:"m",q:XRP+" o sistema Visual Captions, que projeta imagens e ícones ao lado de quem está falando, exemplifica qual pilar?",o:["Consciência social","Consciência espacial","Consciência situacional","Consciência ética"],e:"Ele supre pistas sociais perdidas na conversa."},
+ {d:"h",q:XRP+" o FluencyAR (prática de idiomas) e o terapeuta virtual de TCC exemplificam qual pilar?",o:["Autoconsciência","Consciência social","Consciência espacial","Consciência situacional"],e:"Ajudam o usuário a refletir sobre o próprio desempenho e as próprias emoções."},
+ {d:"m",q:XRP+" qual domínio teve mais estudos?",o:["Educação","Saúde","Treinamento","Acessibilidade"],e:"Educação (41), geração de cenários 3D (28), acessibilidade (24), treinamento (16) e saúde (13)."},
+ {d:"m",q:XRP+" o que significa o “efeito caixa-preta”?",o:["O usuário não sabe por que a IA tomou uma decisão, o que reduz a confiança","Os óculos ficam com a tela preta","O sistema desliga sem aviso","A IA não tem acesso à internet"],e:"É um dos riscos éticos que motivam o 5º pilar."},
+ {d:"m",q:XRP+" qual é o risco para os “bystanders” (pessoas ao redor)?",o:["Câmeras e microfones dos óculos gravam pessoas próximas sem consentimento","Ficarem enjoadas com a realidade virtual","Perderem o sinal do celular","Serem bloqueadas pelo sistema"],e:"É a questão de privacidade de terceiros."},
+ {d:"h",q:XRP+" o que diz a teoria da competição enviesada (“less is more”)?",o:["Estímulos visuais e sonoros disputam recursos cognitivos limitados, e sobrepor funções piora o desempenho","Quanto mais informação na tela, melhor","Menos usuários geram mais dados","Óculos menores são mais rápidos"],e:"Liga-se ao projeto estético e minimalista e à lei de Miller."},
+ {d:"m",q:XRP+" o que é “awareness mismatch” no paradigma clássico de context-aware computing?",o:["O sensor erra e o sistema age fora de hora","O usuário não conhece o sistema","Dois sistemas usam o mesmo sensor","O sistema entende a intenção perfeitamente"],e:"É uma limitação das regras rígidas do tipo IF/THEN."}
+]
+};
+
+const MORE_TF = {
+ "aula-2":{d:"m", t:"Avalie as afirmações sobre técnicas de coleta de dados.", s:[
+   ["A investigação contextual torna explícito o conhecimento tácito do trabalho.",true],
+   ["O questionário é a técnica mais indicada para obter dados profundos de poucos usuários.",false],
+   ["O piloto serve para testar a clareza, a ordem e o tempo de resposta do instrumento.",true],
+   ["A classificação de cartões é usada principalmente para definir cores da interface.",false]],
+   e:"Profundidade com poucos usuários é ponto forte da entrevista. A classificação de cartões serve à arquitetura de informação (menus e navegação)."},
+ "aula-4":{d:"m", t:"Avalie as afirmações sobre interação e interface.", s:[
+   ["Para de Souza (2005), a interação é uma comunicação entre pessoas mediada pelo sistema.",true],
+   ["Interface é apenas a parte gráfica que aparece na tela.",false],
+   ["Uma falsa affordance sugere uma ação que o elemento não oferece.",true],
+   ["Na perspectiva de parceiro de discurso, o computador é tratado como um meio para falar com outras pessoas.",false]],
+   e:"A interface inclui o contato físico e conceitual. Meio para falar com outras pessoas é a perspectiva de mídia; parceiro de discurso trata o computador como alguém com quem se conversa."},
+ "aula-6":{d:"m", t:"Avalie as afirmações sobre as heurísticas de Nielsen.", s:[
+   ["Ctrl+Z é um exemplo de controle e liberdade do usuário.",true],
+   ["Mensagens como “Erro 0x8000” atendem à heurística de ajudar a recuperar erros.",false],
+   ["Mostrar buscas recentes é um exemplo de reconhecimento em vez de memorização.",true],
+   ["Um problema catastrófico pode ficar para depois do lançamento.",false]],
+   e:"Mensagens com códigos violam a heurística 9. Problemas catastróficos devem ser corrigidos antes do lançamento."},
+ "aula-8":{d:"h", t:"Avalie as afirmações sobre os critérios de sucesso das WCAG.", s:[
+   ["O texto alternativo de um botão com lupa deve descrever a função, como “Buscar”.",true],
+   ["Conteúdo pode piscar até 10 vezes por segundo sem problema.",false],
+   ["O idioma da página deve ser declarado para o leitor de tela pronunciar corretamente.",true],
+   ["Arrastar e soltar dispensa alternativa por clique ou toque.",false]],
+   e:"O limite é 3 flashes por segundo (2.3.1). Arrastar e soltar precisa de alternativa (2.5.7)."},
+ "art-duolingo":{d:"m", t:"Avalie as afirmações sobre o artigo “Teaching or Manipulating?” (IHC 2025), que analisa o Duolingo.", s:[
+   ["O estudo foi feito com uso exploratório do app por dois pesquisadores durante 10 dias.",true],
+   ["Os autores aplicaram testes de usabilidade com 100 crianças.",false],
+   ["A exclusão da conta em 3 cliques foi apontada como um bright pattern.",true],
+   ["O mascote Duo, uma coruja verde, foi considerado um exemplo de design ético.",false]],
+   e:"Não houve testes com usuários. A coruja triste ou zangada foi classificada como apelo emocional, um padrão enganoso."},
+ "art-dark":{d:"m", t:"Avalie as afirmações sobre o artigo “Dark Patterns in Games” (ICEIS 2025).", s:[
+   ["Os padrões monetários foram percebidos como os mais nocivos.",true],
+   ["Grinding foi considerado o padrão mais nocivo de todos.",false],
+   ["O questionário teve 30 participantes.",true],
+   ["Os dados seguiram distribuição normal, por isso foram usados testes paramétricos.",false]],
+   e:"Pay Wall foi o mais nocivo; Grinding, um dos menos. O Shapiro-Wilk mostrou dados não normais, então foram usados testes não paramétricos."},
+ "art-jogos":{d:"m", t:"Avalie as afirmações sobre o artigo de usabilidade em jogos sérios de IHC (SBIE 2022).", s:[
+   ["Duas avaliadoras analisaram os jogos primeiro individualmente e depois em consenso.",true],
+   ["O UsabiliCity implementou o maior percentual de especificações.",false],
+   ["O Kappa de Cohen mede a concordância entre avaliadores descontando o acaso.",true],
+   ["Foi feito um teste de usabilidade com 200 alunos.",false]],
+   e:"O maior percentual foi do UsabilityGame (73%). O método foi avaliação heurística, não teste com alunos."},
+ "art-xr":{d:"h", t:"Avalie as afirmações sobre a revisão de Tang et al. (CHI ’25) sobre LLMs em realidade estendida.", s:[
+   ["A revisão selecionou 135 estudos que integram LLMs e XR.",true],
+   ["Mais da metade dos estudos tratou de segurança e privacidade.",false],
+   ["Os autores propõem a consciência ética como 5º pilar.",true],
+   ["O paradigma clássico de context-aware computing já inferia emoções com LLMs.",false]],
+   e:"Só 4 dos 135 estudos trataram de segurança e privacidade. O paradigma clássico usava regras IF/THEN sobre sensores."}
+};
+
+const MORE_OPEN = {
+ "aula-6":{d:"m", q:"Escolha um sistema que você usa e relate um problema de usabilidade como na avaliação heurística.",
+   keys:["Heurística de Nielsen violada","Local do problema (tela e elemento)","Severidade (cosmético, pequeno, grande ou catastrófico) justificada por frequência, impacto e persistência","Justificativa de por que é um problema","Sugestão de solução"],
+   model:"<p><strong>Exemplo:</strong> no carrinho lateral de uma loja online, o ícone de lixeira remove o item na hora.</p><ul><li><strong>Heurística violada:</strong> controle e liberdade do usuário (não há “Desfazer”).</li><li><strong>Local:</strong> carrinho lateral, ícone de lixeira ao lado de cada produto.</li><li><strong>Severidade:</strong> grande. É frequente (o ícone fica perto da quantidade), o impacto é médio (o usuário precisa achar o produto de novo) e persiste a cada compra.</li><li><strong>Justificativa:</strong> um toque acidental desfaz o trabalho do usuário sem saída de emergência.</li><li><strong>Solução:</strong> mostrar “Item removido – Desfazer” por alguns segundos ou pedir confirmação.</li></ul>"},
+ "aula-8":{d:"m", q:"Explique os quatro princípios das WCAG e dê um exemplo de boa prática para cada um.",
+   keys:["Perceptível, com exemplo (texto alternativo, legenda, contraste)","Operável, com exemplo (teclado, foco visível, tempo ajustável)","Compreensível, com exemplo (linguagem clara, erros que explicam como corrigir)","Robusto, com exemplo (HTML semântico, compatibilidade com leitores de tela)"],
+   model:"<ul><li><strong>Perceptível:</strong> a informação precisa poder ser percebida. Ex.: texto alternativo em imagens e legendas em vídeos.</li><li><strong>Operável:</strong> os componentes precisam poder ser operados. Ex.: tudo acessível pelo teclado, com foco visível.</li><li><strong>Compreensível:</strong> a informação e a operação precisam ser entendidas. Ex.: mensagem de erro que diz como corrigir (“use DD/MM/AAAA”).</li><li><strong>Robusto:</strong> o conteúdo precisa funcionar com várias tecnologias, inclusive assistivas. Ex.: HTML semântico compatível com leitores de tela.</li></ul>"},
+ "aula-7":{d:"h", q:"Planeje um teste de usabilidade para comparar dois apps de banco na tarefa de fazer um PIX.",
+   keys:["Objetivo e questão de pesquisa","Perfil dos participantes","Tarefa definida","Medidas de eficácia, eficiência e satisfação","Forma de coleta, piloto e etapas seguintes"],
+   model:"<ul><li><strong>Objetivo:</strong> avaliar a facilidade de fazer um PIX em dois apps.</li><li><strong>Questão de pesquisa:</strong> qual app permite fazer o PIX com mais sucesso, menos tempo e mais satisfação?</li><li><strong>Perfil:</strong> por exemplo, adultos com mais de 60 anos que usam celular diariamente.</li><li><strong>Tarefa:</strong> enviar R$ 10 para uma chave PIX informada.</li><li><strong>Medidas:</strong> eficácia (% que concluiu o PIX correto), eficiência (tempo e número de toques) e satisfação (escala Likert ou SUS ao final).</li><li><strong>Coleta:</strong> gravação de tela e observação, com TCLE assinado.</li><li><strong>Etapas:</strong> piloto com uma pessoa, execução, consolidação dos dados e relato.</li></ul>"},
+ "art-gomez":{d:"m", q:"Com base no artigo de Gomez-Hernandez et al. (2023), cite quatro diretrizes que você aplicaria num app para pessoas idosas e relacione cada uma a um conteúdo da disciplina.",
+   keys:["Simplificar, relacionado a carga cognitiva, lei de Miller ou design minimalista","Controles maiores e mais espaçados, relacionado à lei de Fitts ou à WCAG 2.5.8","Saída segura em todas as telas, relacionado à heurística de controle e liberdade","Outra diretriz (vídeo, rótulo no ícone, contraste, toque simples) com sua relação"],
+   model:"<ul><li><strong>Simplificar</strong> o conceito e as telas → lei de Miller e projeto estético e minimalista.</li><li><strong>Aumentar controles e espaço entre eles</strong> → lei de Fitts e WCAG 2.5.8 (24×24 px) / 2.5.5 (44×44 px).</li><li><strong>Saída segura</strong> (voltar, cancelar) em todas as telas → heurística de controle e liberdade do usuário.</li><li><strong>Rótulo de texto junto de cada ícone</strong> → reconhecimento em vez de memorização.</li><li><strong>Fontes grandes e contraste alto</strong> → WCAG 1.4.3 (4.5:1) e 1.4.4 (zoom de 200%).</li></ul>"}
+};
+
+Object.entries(MORE).forEach(([id, arr])=>{
+  const mi = MODS.findIndex(m=>m.id===id); const m = MODS[mi];
+  arr.forEach(x=>BANK.push({src:"aulas", type:"mc", mi, fig:x.f,
+    tema: x.g ? "gestalt" : m.kind==="artigo" ? "artigo" : (id==="aula-8" && !x.nw) ? "wcag" : "materia",
+    text:x.q, options:x.o, answer:0, exp:x.e, diff:DMAP[x.d]||"medium"}));
+});
+Object.entries(MORE_TF).forEach(([id, t])=>{
+  const mi = MODS.findIndex(m=>m.id===id);
+  BANK.push({src:"aulas", type:"tf", mi, tema:temaOf(MODS[mi],-1,"tf"), text:t.t, statements:t.s.map(([text,answer])=>({text,answer})), exp:t.e, diff:DMAP[t.d]||"medium"});
+});
+Object.entries(MORE_OPEN).forEach(([id, o])=>{
+  const mi = MODS.findIndex(m=>m.id===id);
+  BANK.push({src:"aulas", type:"open", mi, tema:temaOf(MODS[mi],-1,"open"), text:o.q, keys:o.keys, model:o.model, exp:"", diff:DMAP[o.d]||"medium"});
+});
 const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const countBy = f => BANK.filter(f).length;
 const PROVAS = {aulas:"Questões das aulas", pf:"PF 2021.1", all:"Tudo"};
@@ -1695,6 +1991,12 @@ function renderHome(){
       <h1>Interação<br>Humano-<span class="hl">Computador</span></h1>
       <p class="home-sub">Resumo das aulas IHC00 a IHC08 e dos artigos apresentados nos seminários, com ${BANK.length} questões comentadas: múltipla escolha, V/F e discursivas, incluindo a Prova Final 2021.1.</p>
     </div>
+
+    <div class="search-box home-search" role="search">
+      <label class="sr-only" for="home-q">Buscar na matéria</label>
+      <input type="search" id="home-q" placeholder="Buscar na matéria: affordance, contraste, persona, Fitts…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="search-res home-res" id="home-res" hidden></div>
 
     <div class="prova-box">
       <div class="prova-box-head">
@@ -1790,6 +2092,7 @@ function renderHome(){
   $("#qty-select").addEventListener("change", e=>{ qty = +e.target.value; });
   $("#btn-start").addEventListener("click", ()=>startQuiz(pool(), qty));
   refresh();
+  bindSearch($("#home-q"), $("#home-res"));
 }
 
 /* ══════════════════════════════════════════════════════
@@ -2163,9 +2466,17 @@ function renderContent(activeId, inner){
     <div class="side-backdrop" id="side-backdrop"></div>
     <aside class="side" id="side" aria-label="Tópicos da matéria">
       <div class="side-top"><span class="side-title">Tópicos</span><button class="side-close" id="side-close" aria-label="Fechar menu">✕</button></div>
+      <div class="search-box side-search" role="search">
+        <label class="sr-only" for="side-q">Buscar na matéria</label>
+        <input type="search" id="side-q" placeholder="Buscar na matéria…" autocomplete="off" spellcheck="false">
+        <button class="search-clear" id="side-q-clear" aria-label="Limpar busca" hidden>✕</button>
+      </div>
+      <div class="search-res" id="side-res" hidden></div>
+      <div class="side-nav" id="side-nav">
       ${link("resumo", "★", "Resumo completo da matéria")}
       <div class="side-group">Aulas</div>${aulas}
       <div class="side-group">Artigos dos seminários</div>${arts}
+      </div>
       <button class="side-cta" id="side-prova">Simular prova →</button>
       <a class="side-home" href="#inicio">← Voltar ao início</a>
     </aside>
@@ -2202,6 +2513,145 @@ function renderContent(activeId, inner){
       }});
     }, {rootMargin:"-90px 0px -70% 0px"});
     heads.forEach(h=>sideObserver.observe(h));
+  }
+  afterContentRender(setOpen, activeId);
+}
+
+/* ══════════════════════════════════════════════════════
+   BUSCA NA MATÉRIA (resumo, aulas e artigos)
+   ══════════════════════════════════════════════════════ */
+let SEARCH_IDX = null, pendingHit = null, lastQuery = "";
+const normCh = c => (c.normalize("NFD")[0] || c).toLowerCase();
+const normArr = s => Array.from(s, normCh);
+const norm = s => normArr(s).join("");
+function plainText(html){
+  const d = document.createElement("div");
+  d.innerHTML = html.replace(/<\/(td|th|li|p|h3|tr|div|pre|ol|ul|table)>/g, " $&").replace(/<br\s*\/?>/g, " ");
+  d.querySelectorAll("script,input,output").forEach(x=>x.remove());
+  return d.textContent.replace(/\s+/g, " ").trim();
+}
+function buildIndex(){
+  const idx = [];
+  RESUMO_SECS.forEach((s,i)=>idx.push({page:"resumo", pageLabel:"Resumo completo", sec:s.id, head:s.t, text:plainText(s.body)}));
+  MODS.forEach(m=>{
+    const label = m.kind==="artigo" ? `Artigo ${m.n} · ${m.title}` : `Aula ${m.n} · ${m.title}`;
+    const d = document.createElement("div"); d.innerHTML = m.body;
+    let cur = {page:m.id, pageLabel:label, sec:null, head:"Introdução", html:""}, k = 0;
+    const flush = () => { const t = plainText(cur.html); if(t) idx.push({page:cur.page, pageLabel:cur.pageLabel, sec:cur.sec, head:cur.head, text:t}); };
+    [...d.children].forEach(el=>{
+      if(el.tagName==="H2"){ flush(); k++; cur = {page:m.id, pageLabel:label, sec:`sec-${k}`, head:el.textContent.trim(), html:""}; }
+      else cur.html += el.outerHTML;
+    });
+    flush();
+  });
+  idx.forEach(r=>{ r.nText = norm(r.text); r.nHead = norm(r.head); r.chars = Array.from(r.text); });
+  return idx;
+}
+function searchTerms(q){ return norm(q).split(/\s+/).filter(t=>t.length>=2); }
+function runSearch(q){
+  const terms = searchTerms(q); if(!terms.length) return [];
+  if(!SEARCH_IDX) SEARCH_IDX = buildIndex();
+  const out = [];
+  SEARCH_IDX.forEach(r=>{
+    if(!terms.every(t=>r.nText.includes(t) || r.nHead.includes(t))) return;
+    let score = 0;
+    terms.forEach(t=>{ score += (r.nHead.includes(t)?8:0) + Math.min(10, r.nText.split(t).length-1); });
+    if(r.page==="resumo") score += 1;
+    out.push({r, score});
+  });
+  return out.sort((a,b)=>b.score-a.score).slice(0, 40);
+}
+function snippet(r, terms){
+  const n = r.nText; let pos = -1;
+  for(const t of terms){ const p = n.indexOf(t); if(p>=0 && (pos<0 || p<pos)) pos = p; }
+  // n e r.chars têm o mesmo comprimento em code points apenas quando não há caracteres fora do BMP; trabalhamos por code point
+  const nArr = Array.from(n); if(pos>=0) pos = Array.from(n.slice(0,pos)).length;
+  const start = Math.max(0, pos-60), end = Math.min(r.chars.length, (pos<0?0:pos)+140);
+  let html = "", i = start;
+  const nn = nArr.join("");
+  while(i<end){
+    let hit = null;
+    for(const t of terms){ const tl = Array.from(t).length; if(nArr.slice(i,i+tl).join("")===t){ hit = tl; break; } }
+    if(hit){ html += "<mark>" + esc(r.chars.slice(i,i+hit).join("")) + "</mark>"; i += hit; }
+    else { html += esc(r.chars[i]); i++; }
+  }
+  return (start>0?"…":"") + html + (end<r.chars.length?"…":"");
+}
+function renderSearchResults(resEl, q){
+  const terms = searchTerms(q);
+  if(!terms.length){ resEl.innerHTML = ""; resEl.hidden = true; return 0; }
+  const res = runSearch(q);
+  resEl.hidden = false;
+  if(!res.length){ resEl.innerHTML = `<p class="search-empty">Nada encontrado para “${esc(q)}”. Tente outra palavra, como “affordance”, “contraste” ou “persona”.</p>`; return 0; }
+  resEl.innerHTML = `<p class="search-count">${res.length}${res.length===40?"+":""} trecho${res.length>1?"s":""} encontrado${res.length>1?"s":""}</p>` +
+    res.map(({r},i)=>`<button class="search-hit" data-i="${i}"><span class="sh-page">${esc(r.pageLabel)}</span><span class="sh-head">${esc(r.head)}</span><span class="sh-snip">${snippet(r, terms)}</span></button>`).join("");
+  resEl._res = res;
+  return res.length;
+}
+function goHit(hit, q){
+  pendingHit = {page:hit.page, sec:hit.sec, terms:searchTerms(q)};
+  lastQuery = q;
+  if(location.hash === "#"+hit.page) route(); else location.hash = hit.page;
+}
+function bindSearch(input, resEl, onPick, onToggle){
+  if(!input) return;
+  let timer = 0;
+  const update = () => { const n = renderSearchResults(resEl, input.value); onToggle && onToggle(input.value.trim().length>=2); return n; };
+  input.addEventListener("input", ()=>{ clearTimeout(timer); timer = setTimeout(update, 120); });
+  input.addEventListener("keydown", e=>{
+    if(e.key==="Enter"){ e.preventDefault(); update(); const r = resEl._res; if(r && r.length){ onPick && onPick(); goHit(r[0].r, input.value); } }
+    if(e.key==="Escape"){ input.value = ""; lastQuery = ""; update(); }
+  });
+  resEl.addEventListener("click", e=>{
+    const b = e.target.closest(".search-hit"); if(!b) return;
+    onPick && onPick(); goHit(resEl._res[+b.dataset.i].r, input.value);
+  });
+  if(input.value) update();
+}
+function highlightIn(elements, terms){
+  let count = 0;
+  elements.forEach(root=>{
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => n.parentElement.closest("mark,script,style,button,input") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+    const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node=>{
+      if(count>60) return;
+      const chars = Array.from(node.nodeValue), nArr = chars.map(normCh);
+      const frag = document.createDocumentFragment(); let buf = "", i = 0, changed = false;
+      while(i<chars.length){
+        let hit = 0;
+        for(const t of terms){ const tl = Array.from(t).length; if(nArr.slice(i,i+tl).join("")===t){ hit = tl; break; } }
+        if(hit){ if(buf){ frag.append(buf); buf=""; } const mk = document.createElement("mark"); mk.className = "hit"; mk.textContent = chars.slice(i,i+hit).join(""); frag.append(mk); i += hit; count++; changed = true; }
+        else { buf += chars[i]; i++; }
+      }
+      if(changed){ if(buf) frag.append(buf); node.replaceWith(frag); }
+    });
+  });
+  return count;
+}
+function sectionElements(secId){
+  const prose = document.querySelector(".content-main .prose"); if(!prose) return [];
+  if(!secId){ const out = []; for(const el of prose.children){ if(el.tagName==="H2") break; out.push(el); } return out.length ? out : [prose]; }
+  const h = document.getElementById(secId); if(!h) return [];
+  if(h.parentElement.classList.contains("r-sec")) return [h.parentElement];
+  const out = [h]; let el = h.nextElementSibling;
+  while(el && el.tagName!=="H2"){ out.push(el); el = el.nextElementSibling; }
+  return out;
+}
+function afterContentRender(setOpen, activeId){
+  const input = $("#side-q"), res = $("#side-res"), nav = $("#side-nav");
+  if(input){
+    input.value = lastQuery;
+    bindSearch(input, res, ()=>setOpen(false), on=>{ nav.hidden = on; $("#side-q-clear").hidden = !input.value; });
+    $("#side-q-clear").addEventListener("click", ()=>{ input.value = ""; lastQuery = ""; renderSearchResults(res, ""); nav.hidden = false; $("#side-q-clear").hidden = true; input.focus(); });
+  }
+  if(pendingHit && pendingHit.page===activeId){
+    const ph = pendingHit; pendingHit = null;
+    const els = sectionElements(ph.sec);
+    highlightIn(els, ph.terms);
+    setTimeout(()=>{
+      const target = document.querySelector(".content-main mark.hit") || (ph.sec && document.getElementById(ph.sec));
+      if(target) target.scrollIntoView({block:"center"});
+    }, 40);
   }
 }
 
