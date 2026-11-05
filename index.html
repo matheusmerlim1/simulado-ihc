@@ -239,6 +239,56 @@ tr:last-child td{border-bottom:0}
 .rev-ans{font-size:12px;color:var(--text);margin-bottom:4px}
 .rev-exp{font-size:12px;color:var(--text2);line-height:1.6}
 
+/* PÁGINAS DE CONTEÚDO: MENU LATERAL */
+main.wide{max-width:1240px}
+.content-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:44px;align-items:start}
+.content-main{min-width:0}
+.content-main .prose,.content-main .home-header,.content-main .study-cta{max-width:74ch}
+.page-h1{font-size:clamp(28px,4.2vw,42px)!important}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);max-height:calc(100vh - 92px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;padding:0 6px 24px 0;font-size:13px;scrollbar-width:thin}
+.side-top{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px 10px}
+.side-title{font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.side-close{display:none;background:none;border:1px solid var(--border2);color:var(--text2);border-radius:5px;width:30px;height:30px;cursor:pointer;font-size:13px}
+.side-group{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px 10px}
+.side-link{display:flex;gap:9px;align-items:baseline;padding:7px 10px;border-radius:6px;color:var(--text2);text-decoration:none;line-height:1.38;border-left:2px solid transparent;transition:background .12s,color .12s}
+.side-link:hover{background:var(--surface);color:var(--text)}
+.side-link.on{background:var(--accent-dim);color:var(--text-hi);border-left-color:var(--accent);font-weight:700}
+.side-n{font-family:var(--f-mono);font-size:10px;color:var(--muted);min-width:24px;flex-shrink:0}
+.side-link.on .side-n{color:var(--accent)}
+.side-subs{display:flex;flex-direction:column;margin:4px 0 8px 20px;border-left:1px solid var(--border2)}
+.side-sub{background:none;border:0;border-left:2px solid transparent;margin-left:-1px;text-align:left;font-family:var(--f-display);font-size:12px;color:var(--text2);padding:5px 10px;cursor:pointer;line-height:1.38}
+.side-sub:hover{color:var(--text)}
+.side-sub.on{color:var(--accent);border-left-color:var(--accent)}
+.side-cta{margin:20px 0 6px;background:var(--accent);color:var(--on-accent);border:none;border-radius:7px;padding:11px 14px;font-family:var(--f-display);font-size:13px;font-weight:700;cursor:pointer;text-align:left}
+.side-cta:hover{opacity:.88}
+.side-home{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-decoration:none;padding:6px 10px}
+.side-home:hover{color:var(--accent)}
+.side-toggle{display:none}
+.side-backdrop{display:none}
+.prose h2{scroll-margin-top:84px}
+.r-sec h2::before{display:none}
+.r-n{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid rgba(79,138,255,.4);border-radius:4px;padding:2px 6px;flex-shrink:0}
+.r-sec{padding-bottom:8px;border-bottom:1px solid var(--border)}
+.r-sec:last-child{border-bottom:0}
+.num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:12px 0 18px}
+.num{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.num b{font-family:var(--f-mono);font-size:19px;color:var(--accent)}
+.num span{font-size:12px;color:var(--text2);line-height:1.45}
+.resumo-card{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--border2);border-radius:10px;background:var(--surface);padding:18px 20px;text-decoration:none;color:var(--text);margin-top:32px;transition:border-color .15s,transform .15s}
+.resumo-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.resumo-card b{display:block;font-size:17px;color:var(--text-hi);margin-bottom:4px}
+.resumo-card span{font-size:12.5px;color:var(--text2);line-height:1.5}
+.resumo-card .go{font-family:var(--f-mono);font-size:11px;color:var(--accent);white-space:nowrap}
+@media(max-width:920px){
+  .content-layout{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);max-height:none;z-index:500;background:var(--surface);border-right:1px solid var(--border2);padding:calc(env(safe-area-inset-top,0px) + 16px) 12px 28px max(12px,env(safe-area-inset-left,0px));transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s}
+  .side.open{transform:none;visibility:visible}
+  .side-close{display:block}
+  .side-backdrop.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:450}
+  .side-toggle{display:inline-flex;align-items:center;gap:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:200;margin-bottom:18px;background:var(--surface);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:8px 14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+}
+@media (prefers-reduced-motion: reduce){ .side{transition:none} }
+
 /* FIGURAS DAS QUESTÕES */
 .q-fig{margin:0 0 18px;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;overflow-x:auto}
 .q-fig svg{max-width:100%;height:auto;display:block}
@@ -1594,7 +1644,7 @@ const L = ["A","B","C","D","E"];
 function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function pool(){ return BANK.filter(q=>(selProva==="all"||q.src===selProva)&&selAulas.has(q.mi)&&selDiffs.has(q.diff)&&selTypes.has(q.type)); }
 function aulaTag(mi){ return MODS[mi].tag || `Aula ${MODS[mi].n}`; }
-function ctxBlock(q){ const c = MODS[q.mi].ctx; return (q.tema==="artigo" && c) ? `<div class="q-ctx"><span class="q-ctx-head">Contexto</span>${c}</div>` : ""; }
+function ctxBlock(q){ const c = MODS[q.mi].ctx; return (q.tema==="artigo" && c) ? `<div class="q-ctx"><span class="q-ctx-head">Questão sobre o artigo · ${MODS[q.mi].title}</span>${c}</div>` : ""; }
 function modLabel(mi){ const m=MODS[mi]; return m.kind==="artigo" ? m.title : `Aula ${m.n} · ${m.title}`; }
 
 /* ── PROVA SIMULADA: 4 artigos · 1 Gestalt · 3 WCAG · resto da matéria ── */
@@ -1666,6 +1716,8 @@ function renderHome(){
       </div>
       <button class="btn-start" id="btn-prova">Simular prova →</button>
     </div>
+
+    <a class="resumo-card" href="#resumo"><div><b>★ Resumo completo da matéria</b><span>Toda a matéria explicada por assunto, com exemplos, quadro do que mais confunde, números e fórmulas para decorar.</span></div><span class="go">Ler o resumo →</span></a>
 
     <div class="sec-title">Conteúdo das aulas</div>
     <div class="aula-grid">${aulaCards}</div>
@@ -1743,28 +1795,436 @@ function renderHome(){
 /* ══════════════════════════════════════════════════════
    RESUMO DA AULA
    ══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   RESUMO COMPLETO DA MATÉRIA (#resumo)
+   ══════════════════════════════════════════════════════ */
+const RESUMO_SECS = [
+ {id:"r-ihc", t:"O que é IHC e por que ela importa", body:`
+<p>A <strong>Interação Humano-Computador (IHC)</strong> estuda como as pessoas usam sistemas computacionais e como projetar, avaliar e construir esses sistemas para que sejam bons de usar. O livro-base da disciplina é <em>Barbosa e Silva (2010)</em>.</p>
+<p>O ponto de partida é que <strong>TICs</strong> (Tecnologias de Informação e Comunicação) estão em tudo: banco, saúde, governo, educação, comércio. Quando a interface é ruim, quem paga é o usuário: erros, perda de tempo, exclusão. Por isso o desenvolvedor tem responsabilidade: deve <strong>prever os impactos</strong> do que constrói, reduzir os negativos e criar <strong>salvaguardas</strong> para os que não conseguiu prever.</p>
+
+<h3>Termos de base</h3>
+<ul>
+<li><strong>Tecnologia</strong>: do grego <em>techne</em>, “arte, habilidade”. É um termo polissêmico, usado tanto para <strong>artefato</strong> (o objeto) quanto para <strong>técnica</strong> (o modo de fazer).</li>
+<li><strong>Informação</strong>: do latim <em>informationem</em>, “dar forma”. “1,79” é um dado; “Altura: 1,79 m” é informação, porque o dado ganhou contexto.</li>
+<li><strong>Comunicação</strong>: transmitir uma mensagem e, eventualmente, receber outra como resposta.</li>
+</ul>
+
+<h3>Duas formas de construir um sistema</h3>
+<div class="tbl"><table>
+<tr><th>De dentro para fora</th><th>De fora para dentro (visão da IHC)</th></tr>
+<tr><td>Começa pelo banco de dados e pela lógica. A interface vem por último, como uma “casca”.</td><td>Começa por quem vai usar: quem é, o que quer fazer, quando e como. Dados e lógica existem para servir a essa interação.</td></tr>
+</table></div>
+<p>Exemplo da aula: o interfone que trocou <strong>um botão por apartamento</strong> por um <strong>teclado numérico</strong>. Para o fabricante é mais barato e genérico. Para o morador, agora é preciso <em>lembrar</em> a regra de discagem, o que é difícil para idosos e para quem não enxerga. A decisão foi tomada de dentro para fora.</p>
+
+<h3>Do que a IHC trata: os 5 objetivos de Hewett et al. (1992)</h3>
+<ol>
+<li><strong>Natureza da interação</strong>: o que acontece enquanto as pessoas usam o sistema.</li>
+<li><strong>Contexto de uso</strong>: cultura, organização, sociedade, linguagem.</li>
+<li><strong>Características humanas</strong>: cognitivas (memória, atenção, percepção) e físicas (visão, audição, movimento).</li>
+<li><strong>Arquitetura de sistemas</strong>: dispositivos de entrada e saída, menus, formulários.</li>
+<li><strong>Processo de desenvolvimento</strong>: métodos, técnicas e ferramentas para projetar interfaces.</li>
+</ol>
+<p>A IHC é <strong>multidisciplinar</strong>: usa Psicologia, Sociologia e Antropologia para entender pessoas, e Design, Ergonomia, Linguística e Semiótica para definir interfaces. Os <strong>benefícios</strong> são concretos: mais produtividade, menos erros e erros menos graves, menos custo de treinamento e de suporte, mais vendas e fidelidade.</p>
+<p>Quem trabalha com isso: <strong>UX Designer</strong> (a experiência como um todo), <strong>UI Designer</strong> (aparência: cores, tipografia, consistência visual), analista de usabilidade (testes com usuários), especialista em acessibilidade, pesquisadores e engenheiros de software.</p>`},
+
+ {id:"r-qualidade", t:"Qualidade de uso: usabilidade, UX, acessibilidade e comunicabilidade", body:`
+<p>Para dizer se um sistema é “bom de usar”, Barbosa e Silva usam <strong>quatro critérios de qualidade de uso</strong>. Eles são diferentes entre si e a prova costuma pedir a definição de cada um.</p>
+<div class="tbl"><table>
+<tr><th>Critério</th><th>Pergunta que responde</th><th>Exemplo</th></tr>
+<tr><td><strong>Usabilidade</strong></td><td>O usuário consegue atingir o objetivo com eficácia, eficiência e satisfação?</td><td>Fazer um PIX em 3 toques, sem errar, e sair satisfeito.</td></tr>
+<tr><td><strong>Experiência do usuário (UX)</strong></td><td>Como o usuário se <em>sente</em>? É agradável, confiável, motivador?</td><td>Um app que dá prazer de usar, não só “funciona”.</td></tr>
+<tr><td><strong>Acessibilidade</strong></td><td>Pessoas com diferentes capacidades conseguem perceber, entender e usar?</td><td>Um cego usando o site com leitor de tela.</td></tr>
+<tr><td><strong>Comunicabilidade</strong></td><td>A interface comunica bem a lógica do design, o que o designer quis dizer?</td><td>Os ícones e rótulos deixam claro o que cada função faz.</td></tr>
+</table></div>
+
+<h3>Usabilidade em detalhe (ISO 9241-11)</h3>
+<div class="def"><b>Definição.</b> Medida em que um produto pode ser usado por <strong>usuários específicos</strong> para alcançar <strong>objetivos específicos</strong> com <strong>eficácia</strong>, <strong>eficiência</strong> e <strong>satisfação</strong>, em um <strong>contexto de uso específico</strong>.</div>
+<ul>
+<li><strong>Eficácia</strong> = <em>conseguiu?</em> Atingir o objetivo com precisão e completude. Mede-se por taxa de sucesso e número de erros.</li>
+<li><strong>Eficiência</strong> = <em>quanto custou?</em> Tempo, cliques e esforço gastos para atingir o objetivo.</li>
+<li><strong>Satisfação</strong> = <em>gostou?</em> Conforto e aceitação. Mede-se com questionário (Likert, SUS) e observando frustrações.</li>
+<li><strong>Contexto de uso</strong>: quem é o usuário, qual a tarefa, em que ambiente e com que dispositivo.</li>
+</ul>
+<p class="note">Dica de prova: “Qual app tem melhor usabilidade?” só tem resposta quando você diz <strong>para quem</strong>, <strong>para qual tarefa</strong> e <strong>em qual atributo</strong>. Um app pode ser eficaz (todos conseguem) e pouco eficiente (demora muito).</p>`},
+
+ {id:"r-conceitos", t:"Conceitos básicos: interação, interface, affordance e metáforas", body:`
+<h3>Interação e interface</h3>
+<p>Numa situação de uso há um <strong>usuário</strong> com um <strong>objetivo</strong>, um <strong>sistema</strong> e, entre os dois, a <strong>interface</strong>, tudo dentro de um <strong>contexto</strong> (tempo, lugar, cultura).</p>
+<ul>
+<li><strong>Interface</strong> é toda parte do sistema com que o usuário tem contato <strong>físico</strong> (tela, teclado, botão) ou <strong>conceitual</strong> (os conceitos e a linguagem que ele precisa entender).</li>
+<li><strong>Interação</strong> é o processo que acontece entre usuário e sistema. Há duas visões principais:
+  <ul>
+  <li><strong>Norman (1986)</strong>: um ciclo cognitivo. O usuário forma uma intenção, planeja, age, percebe a resposta, interpreta e avalia se chegou ao objetivo. É a base da engenharia cognitiva.</li>
+  <li><strong>de Souza (2005)</strong>: uma <strong>comunicação entre pessoas</strong>. O designer “fala” com o usuário por meio da interface. É a base da engenharia semiótica.</li>
+  </ul></li>
+</ul>
+<p><strong>Perspectivas de Kammersgaard (1988)</strong>, ou seja, como enxergamos o computador na interação: como <strong>sistema</strong> (o usuário é quase uma peça que troca dados), como <strong>parceiro de discurso</strong> (conversamos com ele, como um chatbot), como <strong>ferramenta</strong> (instrumento para produzir algo) ou como <strong>mídia</strong> (meio para falar com outras pessoas).</p>
+
+<h3>Affordance</h3>
+<div class="def"><b>Affordance (Norman, 1988).</b> Característica de um objeto que <strong>revela o que se pode fazer com ele</strong>. A maçaneta de alavanca “pede” para ser empurrada para baixo; um botão com relevo “pede” um clique.</div>
+<p><strong>Falsa affordance</strong> é quando a aparência mente: um texto informativo desenhado como botão (sugere uma ação que não existe) ou pontinhos de carrossel que não respondem ao clique. O contrário também é problema: algo clicável que não parece clicável.</p>
+
+<h3>Metáforas</h3>
+<p>Metáfora é usar algo que o usuário já conhece do mundo real para explicar o digital: <strong>carrinho de compras</strong>, <strong>lixeira</strong>, <strong>pasta</strong>. Funciona quando o usuário conhece a referência. O disquete como ícone de “salvar” é uma metáfora de uma tecnologia que muitos jovens nunca viram, mas que continua enraizada.</p>
+
+<h3>Comunicabilidade e engenharia semiótica</h3>
+<p><strong>Comunicabilidade</strong> é a capacidade da interface de transmitir a <strong>lógica do design</strong>: por que as coisas estão onde estão e como o sistema deve ser usado.</p>
+<p>A <strong>engenharia semiótica</strong> (de Souza, 2005) leva isso a sério: a interface é uma <strong>mensagem do designer para o usuário</strong> (metacomunicação), que diz “eu entendi que você é assim, quer fazer isso, e por isso o sistema funciona desta forma”. Rótulos, ícones e mensagens de erro são <strong>signos</strong> dessa mensagem. Quando o usuário entende o signo de outro jeito, há uma <strong>ruptura de comunicação</strong>. Métodos: <strong>MIS</strong> (inspeção semiótica) e <strong>MAC</strong> (avaliação de comunicabilidade, que registra reações como “Cadê?”, “E agora?”, “Ué, o que houve?”).</p>
+
+<h3>Boas práticas e estilos de interação</h3>
+<ul>
+<li>Texto claro, sem jargão: “Salvar”, não “Persistir dados”.</li>
+<li>Ícone acompanhado de rótulo de texto.</li>
+<li>Metáforas adequadas à cultura do usuário.</li>
+</ul>
+<p>Estilos de interação: <strong>WIMP</strong> (Windows, Icons, Menus, Pointers, o desktop clássico), interfaces <strong>mobile</strong> por toque, <strong>linguagem de comando</strong> (terminal) e <strong>linguagem natural</strong> (assistentes de voz, chatbots).</p>`},
+
+ {id:"r-usuario", t:"Conhecer o usuário: coleta de dados, técnicas e ética", body:`
+<p>Antes de desenhar qualquer tela é preciso entender <strong>quem são os usuários</strong>, <strong>o que fazem</strong>, <strong>como fazem hoje</strong> e <strong>o que sentem</strong> (motivações, frustrações, “dores”).</p>
+
+<h3>Que dados coletar</h3>
+<ul>
+<li><strong>Sobre a pessoa</strong>: idade, escolaridade, idioma, jargões, como prefere aprender.</li>
+<li><strong>Relação com tecnologia</strong>: experiência, produtos parecidos que usa, que aparelho tem.</li>
+<li><strong>Conhecimento do domínio</strong>: é leigo ou especialista no assunto?</li>
+<li><strong>Tarefas</strong>: objetivos, tarefas principais e secundárias, frequência, <strong>gravidade dos erros</strong>.</li>
+<li><strong>Motivações e valores</strong>: o que o motiva, se tem medo de tecnologia, se gosta de explorar.</li>
+</ul>
+<p>E de quem? Dos <strong>usuários finais</strong> e dos <strong>stakeholders</strong>: quem será afetado, quem decide as funcionalidades, quem definiu os processos.</p>
+
+<h3>Técnicas de coleta</h3>
+<div class="tbl"><table>
+<tr><th>Técnica</th><th>Como é</th><th>Quando usar</th><th>Cuidado</th></tr>
+<tr><td><strong>Entrevista</strong></td><td>Conversa guiada por roteiro (não estruturada, semiestruturada ou estruturada)</td><td>Quando se quer profundidade com cada pessoa</td><td>Leva tempo; exige treinar o entrevistador</td></tr>
+<tr><td><strong>Questionário</strong></td><td>Formulário com perguntas</td><td>Muitas pessoas, rápido e barato</td><td>É mais superficial; perguntas ambíguas ou que induzem a resposta estragam os dados</td></tr>
+<tr><td><strong>Grupo de foco</strong></td><td><strong>3 a 10</strong> pessoas, 1 a 2 horas, com moderador</td><td>Vários pontos de vista de uma vez</td><td>O moderador evita que os falantes dominem e faz os tímidos participarem</td></tr>
+<tr><td><strong>Brainstorming</strong></td><td><strong>8 a 12</strong> usuários levantam ideias livremente, primeiro individual e depois em grupo</td><td>Explorar necessidades e desejos</td><td>Não é para projetar a solução (não é design participativo)</td></tr>
+<tr><td><strong>Classificação de cartões</strong></td><td>Pessoas agrupam cartões com conteúdos por semelhança</td><td>Definir menus e navegação (arquitetura de informação)</td><td>Segue 7 passos, do objetivo à análise</td></tr>
+<tr><td><strong>Estudo de campo</strong></td><td>O pesquisador observa o usuário no ambiente real</td><td>Ver interrupções e contexto que o laboratório não reproduz</td><td>Pode ser observação pura, participante, entrevista no local ou diário</td></tr>
+<tr><td><strong>Investigação contextual</strong></td><td>Estudo de campo em que o pesquisador age como <strong>aprendiz</strong> do usuário</td><td>Revelar o conhecimento <strong>tácito</strong>, aquilo que o usuário faz sem perceber</td><td>Exige tempo no local</td></tr>
+</table></div>
+
+<h3>Tipos de pergunta</h3>
+<ul>
+<li><strong>Aberta</strong>: resposta livre (“Quais são suas principais atividades?”).</li>
+<li><strong>Fechada</strong>: opções definidas (escolha única ou múltipla, faixa de valores).</li>
+<li><strong>Escala de Likert</strong>: grau de concordância com uma frase, de “discordo totalmente” a “concordo totalmente”.</li>
+<li><strong>Diferencial semântico</strong>: posição entre dois adjetivos opostos (fácil … difícil).</li>
+</ul>
+<p>Antes de aplicar, faça um <strong>piloto</strong>: ele testa clareza, ordem, tempo e problemas técnicos do instrumento.</p>
+
+<h3>Ética</h3>
+<ul>
+<li><strong>Lei nº 14.874/2024</strong>: pesquisa científica com seres humanos deve passar por um <strong>Comitê de Ética em Pesquisa (CEP)</strong> antes de começar.</li>
+<li><strong>TCLE</strong> (Termo de Consentimento Livre e Esclarecido): explica título, responsável, objetivo, procedimentos, riscos e benefícios, privacidade, direitos (sair a qualquer momento) e coleta a assinatura.</li>
+<li>Pesquisa interna de empresa com dados anonimizados (para personas, por exemplo) <strong>não precisa de CEP</strong>, mas continua exigindo <strong>consentimento</strong> e respeito à <strong>LGPD</strong>.</li>
+</ul>`},
+
+ {id:"r-problema", t:"Organizar o que se aprendeu: perfis, personas, cenários e tarefas", body:`
+<p>Depois de coletar os dados, o designer precisa <strong>organizá-los</strong> de um jeito que a equipe consulte durante o projeto. Cada representação serve para uma coisa.</p>
+<div class="tbl"><table>
+<tr><th>Representação</th><th>O que é</th><th>Exemplo curto</th></tr>
+<tr><td><strong>Perfil de usuário</strong></td><td>Descrição de <em>grupos</em> de usuários reais com características em comum. Destaca algumas características e abstrai outras.</td><td>“Coordenadores, 40–50 anos, usam tecnologia várias vezes ao dia, aprendem fazendo.”</td></tr>
+<tr><td><strong>Persona</strong></td><td><strong>Personagem fictício</strong> que representa um grupo. Tem nome, foto, objetivos, frustrações, motivações e uma frase típica.</td><td>João, 35 anos, fiscal de obras: “Se eu puder resolver aqui do campo, melhor pra todo mundo.”</td></tr>
+<tr><td><strong>História de usuário</strong></td><td>Necessidade em uma frase: <span class="mono">Como &lt;papel&gt;, quero &lt;ação&gt;, para que &lt;benefício&gt;</span>. Na IHC ganha contexto, frustrações, emoções esperadas e <strong>critérios de aceitação</strong>.</td><td>“Como inspetor, quero registrar uma ocorrência pelo celular, para que o gerente resolva sem ir ao local.” Critério: funciona offline.</td></tr>
+<tr><td><strong>Cenário</strong></td><td><strong>Narrativa concreta</strong> de uma situação de uso, com atores, ambiente, objetivos, planejamento, ações, eventos e avaliação.</td><td>João, numa obra rural sem sinal, abre o app, que sugere o projeto pelo GPS, tira a foto e salva para sincronizar depois.</td></tr>
+<tr><td><strong>Análise de tarefas</strong></td><td>Decomposição <strong>hierárquica</strong> de uma tarefa em subtarefas numeradas, com decisões e dificuldades.</td><td>1. Abrir o app (1.1 desbloquear, 1.2 tocar no ícone); 2. Selecionar o projeto; 3. Fotografar…</td></tr>
+<tr><td><strong>Jornada do usuário</strong></td><td>A experiência completa ao longo do tempo: contexto, ações, <strong>emoções</strong>, pontos de contato e obstáculos.</td><td>Antes: frustração. Durante: agilidade. Depois: alívio.</td></tr>
+</table></div>
+<p class="note">Para não confundir: o <strong>perfil</strong> descreve grupos reais com dados; a <strong>persona</strong> é um personagem inventado a partir desses dados. O <strong>cenário</strong> conta uma história; a <strong>análise de tarefas</strong> quebra a tarefa em passos; a <strong>jornada</strong> acrescenta as emoções.</p>`},
+
+ {id:"r-prototipo", t:"Protótipos", body:`
+<p>Protótipo é uma <strong>representação simplificada</strong> do sistema, feita para testar ideias e validar decisões com usuários antes de programar. Quanto mais cedo, mais barato e mais descartável.</p>
+<div class="tbl"><table>
+<tr><th>Tipo</th><th>Como é</th><th>Para quê</th></tr>
+<tr><td><strong>Baixa fidelidade</strong> (wireframe)</td><td>Rabisco em papel ou quadro, sem cores nem interação. Barato e descartável.</td><td>Entender requisitos e discutir a estrutura no início.</td></tr>
+<tr><td><strong>Média fidelidade</strong></td><td>Feito em ferramenta, mais próximo do visual final, com algumas sequências de navegação simuladas.</td><td>Validar layout, navegação e funções principais.</td></tr>
+<tr><td><strong>Mockup</strong></td><td>Visual <strong>estático</strong> com cores, fontes e identidade finais; não precisa funcionar.</td><td>Aprovar a aparência com cliente e equipe.</td></tr>
+<tr><td><strong>Alta fidelidade</strong></td><td>Parece o produto: visual final, interatividade e navegação (Figma ou código). Pode evoluir até o sistema final.</td><td>Testes de usabilidade e validação final.</td></tr>
+</table></div>`},
+
+ {id:"r-cognicao", t:"Como as pessoas percebem e decidem: Gestalt e as leis de Hick, Fitts e Miller", body:`
+<h3>Gestalt</h3>
+<p>Gestalt é uma <strong>escola alemã de psicologia</strong> (Wertheimer, Köhler e Koffka) que estuda como o cérebro organiza o que vemos em grupos e formas. Em IHC, ela explica por que um layout “se lê” bem ou mal.</p>
+<div class="tbl"><table>
+<tr><th>Princípio</th><th>O que diz</th><th>Na interface</th></tr>
+<tr><td><strong>Proximidade</strong></td><td>O que está perto parece um grupo.</td><td>Rótulo colado ao campo; espaço maior entre seções.</td></tr>
+<tr><td><strong>Similaridade</strong></td><td>O que é parecido parece um grupo.</td><td>Todos os links na mesma cor; botões de mesma função com o mesmo estilo.</td></tr>
+<tr><td><strong>Boa continuidade</strong></td><td>O olho segue linhas e fluxos contínuos.</td><td>Carrossel com o último item cortado convida a rolar.</td></tr>
+<tr><td><strong>Simetria</strong></td><td>Formas simétricas são percebidas mais rápido.</td><td>Layout equilibrado e alinhado.</td></tr>
+<tr><td><strong>Destino comum</strong></td><td>O que se move junto parece um grupo.</td><td>Arquivos selecionados que se arrastam juntos.</td></tr>
+<tr><td><strong>Fecho</strong></td><td>A mente completa formas incompletas.</td><td>Ícones com traço interrompido continuam reconhecíveis.</td></tr>
+</table></div>
+
+<h3>Lei de Hick-Hyman: tempo para <em>decidir</em></h3>
+<div class="formula">T = k · log₂(N + 1)      k ≈ 150 ms</div>
+<p>Quanto mais opções (N), mais tempo para escolher, mas o tempo cresce de forma <strong>logarítmica</strong>, não proporcional. Exemplo: 7 opções → 150 · log₂ 8 = 150 · 3 = <strong>450 ms</strong>. Com 15 opções → 150 · log₂ 16 = <strong>600 ms</strong>. Dobrar as opções <em>não</em> dobra o tempo.</p>
+<p>Aplicação: menos opções visíveis, agrupar em categorias, destacar as mais usadas.</p>
+
+<h3>Lei de Fitts: tempo para <em>apontar</em></h3>
+<div class="formula">T = k · log₂(D / S + 0,5)      k ≈ 100 ms</div>
+<p>D é a distância até o alvo e S é o tamanho do alvo. <strong>Alvo grande e perto = rápido.</strong> Exemplo: D = 7 e S = 2 → 100 · log₂(4) = <strong>200 ms</strong>. O menu no topo da <em>tela</em> (macOS) é rápido porque a borda segura o cursor, como se o alvo fosse infinito.</p>
+<p>Aplicação: botões principais grandes, ações em sequência próximas, ações importantes no centro ou embaixo da tela do celular.</p>
+
+<h3>Lei de Miller: o limite da memória</h3>
+<p>A memória de trabalho guarda cerca de <strong>7 ± 2</strong> itens (“chunks”) ao mesmo tempo (Miller, 1956). Por isso agrupamos informação: <span class="mono">(22) 98824-7878</span> é mais fácil de lembrar que <span class="mono">22988247878</span>. Aplicação: menus com 5 a 9 itens, informação em blocos, mostrar o essencial primeiro (<em>progressive disclosure</em>).</p>
+<p class="note">Para não confundir: <strong>Hick</strong> = quantas opções (decidir). <strong>Fitts</strong> = tamanho e distância do alvo (apontar). <strong>Miller</strong> = quanto cabe na memória (lembrar).</p>`},
+
+ {id:"r-norman", t:"Engenharia cognitiva: a teoria da ação e os golfos", body:`
+<p>A engenharia cognitiva (Donald Norman) parte de uma distância: o usuário pensa em <strong>objetivos</strong> (“quero a água morna”), mas o sistema oferece <strong>controles físicos</strong> (duas torneiras). Quanto maior essa distância, mais difícil o uso. A torneira de duas manoplas mostra três problemas:</p>
+<ul>
+<li><strong>Mapeamento</strong>: qual é a quente? Para que lado gira?</li>
+<li><strong>Controle</strong>: para mudar a temperatura sem mudar o fluxo, é preciso mexer nas duas ao mesmo tempo.</li>
+<li><strong>Avaliação</strong>: com dois bicos, é difícil saber se chegou à temperatura desejada.</li>
+</ul>
+
+<h3>As 7 etapas da teoria da ação</h3>
+<p><strong>Lado da execução</strong>, do objetivo até o mundo:</p>
+<ol class="flow exec"><li><b>1</b>Estabelecer o objetivo</li><li><b>2</b>Formular a intenção</li><li><b>3</b>Especificar as ações</li><li><b>4</b>Executar</li></ol>
+<p><strong>Lado da avaliação</strong>, do mundo de volta ao objetivo:</p>
+<ol class="flow aval"><li><b>5</b>Perceber</li><li><b>6</b>Interpretar</li><li><b>7</b>Avaliar</li></ol>
+<p>Exemplo: mudar a cor de um retângulo para verde-oliva. Objetivo: mudar a cor. Intenção: usar R=85, G=107, B=47. Ações: abrir Formatar › Cor de fundo, digitar os valores, confirmar. Depois de cada passo o usuário percebe o que mudou na tela, interpreta (“a pré-visualização ficou verde”) e avalia se está mais perto do objetivo.</p>
+
+<h3>Os dois golfos</h3>
+<div class="tbl"><table>
+<tr><th>Golfo</th><th>O que é</th><th>Pergunta do usuário</th><th>Exemplo</th></tr>
+<tr><td><strong>Execução</strong></td><td>Distância entre o que o usuário quer e as ações que a interface oferece.</td><td>“Como eu faço isso aqui?”</td><td>Querer fazer um PIX e ver “Transferir”, “Pagar”, “PIX” e “Enviar dinheiro”.</td></tr>
+<tr><td><strong>Avaliação</strong></td><td>Distância entre o estado do sistema e o que o usuário consegue perceber e entender.</td><td>“Deu certo?”</td><td>Depois de pagar, a tela mostra só um protocolo, e ninguém sabe se o dinheiro saiu.</td></tr>
+</table></div>
+<p><strong>Três modelos:</strong> o designer tem um <strong>modelo de design</strong> e o expressa na <strong>imagem do sistema</strong> (a interface). O usuário constrói seu <strong>modelo conceitual</strong> a partir dessa imagem. Se a imagem for clara e consistente, os dois modelos se aproximam e os golfos diminuem.</p>`},
+
+ {id:"r-avaliacao", t:"Avaliação: heurística, percurso cognitivo e teste de usabilidade", body:`
+<p>Avaliar é verificar se a interface atende ao usuário. Há dois grandes grupos de métodos:</p>
+<div class="tbl"><table>
+<tr><th></th><th>Inspeção</th><th>Observação</th></tr>
+<tr><td>Quem avalia</td><td>Especialista, <strong>sem usuários</strong>, se colocando no lugar deles</td><td><strong>Usuários reais</strong> usando o sistema</td></tr>
+<tr><td>Exemplos</td><td>Avaliação heurística, percurso cognitivo, inspeção semiótica</td><td>Teste de usabilidade</td></tr>
+<tr><td>Custo</td><td>Baixo e rápido</td><td>Maior, mas mostra o uso real</td></tr>
+</table></div>
+
+<h3>Avaliação heurística (Nielsen)</h3>
+<p>O avaliador percorre a interface procurando violações de <strong>heurísticas</strong>, princípios gerais de bom design. As 10 de Nielsen podem ser complementadas:</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Heurística</th><th>Em uma frase</th><th>Exemplo</th></tr>
+<tr><td class="mono">1</td><td>Visibilidade do estado do sistema</td><td>Sempre mostre o que está acontecendo.</td><td>Barra de progresso no upload</td></tr>
+<tr><td class="mono">2</td><td>Correspondência com o mundo real</td><td>Fale a língua do usuário.</td><td>“Carrinho”, não “Persistir registro”</td></tr>
+<tr><td class="mono">3</td><td>Controle e liberdade</td><td>Deixe desfazer e sair.</td><td>Ctrl+Z, Cancelar, “Desfazer envio”</td></tr>
+<tr><td class="mono">4</td><td>Consistência e padronização</td><td>A mesma coisa sempre com o mesmo nome e aparência.</td><td>Menu “Funcionamento” abrindo janela “Atendimento” viola</td></tr>
+<tr><td class="mono">5</td><td>Prevenção de erros</td><td>Melhor evitar o erro do que avisar dele.</td><td>Calendário que bloqueia datas passadas</td></tr>
+<tr><td class="mono">6</td><td>Reconhecimento em vez de memorização</td><td>Mostre as opções; não obrigue a lembrar.</td><td>Buscas recentes, autocompletar, ícone com rótulo</td></tr>
+<tr><td class="mono">7</td><td>Flexibilidade e eficiência</td><td>Atalhos para experientes sem atrapalhar novatos.</td><td>Atalhos de teclado, favoritos</td></tr>
+<tr><td class="mono">8</td><td>Estético e minimalista</td><td>Só o necessário na tela.</td><td>Página inicial sem banners competindo</td></tr>
+<tr><td class="mono">9</td><td>Reconhecer, diagnosticar e recuperar erros</td><td>Erro em linguagem simples, com solução.</td><td>“Senha precisa de 8 caracteres”, não “Erro 0x8000”</td></tr>
+<tr><td class="mono">10</td><td>Ajuda e documentação</td><td>Ajuda fácil de achar e focada na tarefa.</td><td>FAQ, dicas contextuais</td></tr>
+</table></div>
+<p><strong>Severidade</strong> depende de <strong>frequência</strong> (acontece muito?), <strong>impacto</strong> (é difícil de contornar?) e <strong>persistência</strong> (atrapalha sempre?). A escala de Nielsen tem quatro níveis: <strong>cosmético</strong> (só se sobrar tempo), <strong>pequeno</strong> (baixa prioridade), <strong>grande</strong> (alta prioridade) e <strong>catastrófico</strong> (impede a tarefa; corrigir antes de lançar).</p>
+<p>Cada problema é <strong>relatado</strong> com: a heurística violada, o local (tela e elemento), a severidade, a justificativa e, se possível, uma sugestão de solução.</p>
+
+<h3>Percurso cognitivo</h3>
+<p>Inspeção focada na <strong>facilidade de aprendizado por exploração</strong>, para quem “aprende fazendo” sem ler manual. O avaliador percorre uma tarefa passo a passo e verifica se a <strong>imagem do sistema</strong> corresponde ao <strong>modelo conceitual do usuário</strong>: se o usuário entende o que fazer, se reconhece a ação certa pelo vocabulário e se entende a resposta do sistema.</p>
+
+<h3>Teste de usabilidade</h3>
+<p>Usuários reais executam <strong>tarefas</strong> enquanto são observados. Mede-se, por tarefa: sucesso, erros, tipos de erro, tempo e satisfação. Para a <strong>facilidade de aprendizado</strong>: erros nas primeiras sessões, tarefas concluídas e consultas à ajuda.</p>
+<p><strong>Como planejar:</strong> objetivo → questão de pesquisa → perfil dos participantes → tarefas → medidas (eficácia, eficiência, satisfação) → forma de coleta (gravação, observação) → <strong>piloto</strong> → execução → consolidação → relato.</p>
+<div class="tbl"><table>
+<tr><th>Medida</th><th>Exemplo: comprar a panela mais barata</th></tr>
+<tr><td>Eficácia</td><td>% de participantes que compraram a panela certa</td></tr>
+<tr><td>Eficiência</td><td>Tempo médio até adicionar ao carrinho; número de cliques</td></tr>
+<tr><td>Satisfação</td><td>Nota em escala Likert ou SUS após a tarefa</td></tr>
+</table></div>`},
+
+ {id:"r-acess", t:"Acessibilidade e WCAG", body:`
+<p><strong>Acessibilidade</strong> é permitir que pessoas com diferentes capacidades (visuais, auditivas, motoras, cognitivas, idosos) <strong>percebam, entendam, naveguem e usem</strong> o sistema. Beneficia todos: legenda ajuda quem está num lugar barulhento, contraste ajuda quem está no sol.</p>
+<p>Exemplo da aula: em um curso há um aluno com baixa visão, um cego e um surdo. Precisam, respectivamente, de <strong>contraste e zoom</strong>, <strong>compatibilidade com leitor de tela</strong> e <strong>legendas</strong>, além de HTML semântico para todos. Uma única medida não resolve todos os casos.</p>
+
+<h3>Leis e normas</h3>
+<ul>
+<li><strong>WCAG</strong>: diretrizes do W3C para conteúdo web acessível (versão 2.2).</li>
+<li><strong>Lei 10.098/2000</strong>: normas gerais de acessibilidade.</li>
+<li><strong>Lei 13.146/2015</strong>: Lei Brasileira de Inclusão (LBI), o Estatuto da Pessoa com Deficiência.</li>
+<li><strong>ABNT NBR 17225</strong>: acessibilidade em conteúdo web, alinhada às WCAG.</li>
+<li><strong>e-MAG</strong>: modelo de acessibilidade do governo eletrônico.</li>
+</ul>
+
+<h3>Os 4 princípios (POUR)</h3>
+<div class="tbl"><table>
+<tr><th>Princípio</th><th>Significa</th><th>Exemplos</th></tr>
+<tr><td><strong>Perceptível</strong></td><td>Dá para perceber a informação?</td><td>Texto alternativo em imagens, legendas, contraste, não usar só cor</td></tr>
+<tr><td><strong>Operável</strong></td><td>Dá para operar?</td><td>Tudo pelo teclado, foco visível, tempo ajustável, nada piscando</td></tr>
+<tr><td><strong>Compreensível</strong></td><td>Dá para entender?</td><td>Linguagem simples, idioma declarado, erros que explicam como corrigir</td></tr>
+<tr><td><strong>Robusto</strong></td><td>Funciona com tecnologias assistivas?</td><td>HTML semântico, compatível com leitores de tela</td></tr>
+</table></div>
+<p><strong>Níveis de conformidade</strong> (cumulativos): <strong>A</strong> é o mínimo; <strong>AA</strong> inclui o A e mais critérios, e é o alvo mais comum; <strong>AAA</strong> é o mais rigoroso. Cada <strong>critério de sucesso</strong> é uma condição <strong>testável</strong>.</p>
+
+<h3>Critérios mais cobrados</h3>
+<div class="tbl"><table>
+<tr><th>Critério</th><th>Nível</th><th>O que pede</th></tr>
+<tr><td class="mono">1.1.1</td><td>A</td><td>Texto alternativo que descreve a <em>função</em>: botão de lupa tem alt “Buscar”, não “lupa”</td></tr>
+<tr><td class="mono">1.2.2</td><td>A</td><td>Legendas em vídeo pré-gravado</td></tr>
+<tr><td class="mono">1.4.1</td><td>A</td><td>Cor não pode ser a única forma de informar (erro só em vermelho viola)</td></tr>
+<tr><td class="mono">1.4.3</td><td>AA</td><td>Contraste mínimo <strong>4.5:1</strong>; texto grande <strong>3:1</strong></td></tr>
+<tr><td class="mono">1.4.4</td><td>AA</td><td>Texto legível com zoom de <strong>200%</strong></td></tr>
+<tr><td class="mono">2.1.1</td><td>A</td><td>Toda função acessível pelo teclado</td></tr>
+<tr><td class="mono">2.2.2</td><td>A</td><td>Movimento ou piscar por mais de 5 s pode ser pausado</td></tr>
+<tr><td class="mono">2.3.1</td><td>A</td><td>Nada pisca mais de <strong>3 vezes por segundo</strong></td></tr>
+<tr><td class="mono">2.4.2 / 2.4.3</td><td>A</td><td>Página com título; ordem de foco lógica</td></tr>
+<tr><td class="mono">2.5.7</td><td>AA</td><td>Arrastar e soltar precisa de alternativa por clique</td></tr>
+<tr><td class="mono">2.5.8 / 2.5.5</td><td>AA / AAA</td><td>Área de toque mínima <strong>24×24 px</strong> (AA) ou <strong>44×44 px</strong> (AAA)</td></tr>
+<tr><td class="mono">3.1.1</td><td>A</td><td>Idioma declarado (<code>lang="pt-br"</code>) para o leitor de tela pronunciar certo</td></tr>
+<tr><td class="mono">3.3.1 / 3.3.3</td><td>A / AA</td><td>Indicar o campo com erro e dizer como corrigir</td></tr>
+<tr><td class="mono">3.3.4</td><td>AA</td><td>Confirmar ou cancelar envio de dados legais, financeiros ou sensíveis</td></tr>
+</table></div>
+<p><strong>Ferramentas e tecnologias assistivas:</strong> WAVE (extensão) e Lighthouse (F12) para inspecionar; leitores de tela NVDA (gratuito), JAWS (pago), VoiceOver (Apple), TalkBack (Android) e Orca (Linux).</p>`},
+
+ {id:"r-artigos", t:"Os artigos dos seminários", body:`
+<p>Cada artigo aplica conceitos da disciplina num caso real. Para a prova, saiba o <strong>objetivo</strong>, o <strong>método</strong>, o <strong>principal resultado</strong> e a <strong>ligação com a matéria</strong>.</p>
+<div class="tbl"><table>
+<tr><th>Artigo</th><th>Objetivo e método</th><th>Resultado principal</th><th>Ligação com a matéria</th></tr>
+<tr><td><strong>Falando, desenhando e avaliando</strong><br><small>IHC 2025, ICMC-USP</small></td><td>Criar um repositório de tecnologias acessível para idosos com <strong>DCH</strong> (ISO 9241-210): 3 workshops com 9 idosos (análise, design participativo em papel, teste de usabilidade com SUS e SAM)</td><td>18 dificuldades (acessibilidade, usabilidade, letramento); SUS muito alto; “controle” foi a nota mais baixa no SAM. Limitação: amostra de classe média-alta e escolarizada</td><td>Coleta de dados, TCLE e CEP, protótipos, teste de usabilidade, WCAG, falsa affordance</td></tr>
+<tr><td><strong>Teaching or Manipulating?</strong> (Duolingo)<br><small>IHC 2025, UFRPE</small></td><td>Ver se o Duolingo usa <strong>dark patterns</strong> ou <strong>bright patterns</strong> com crianças: 10 dias de uso exploratório por dois pesquisadores, sem usuários</td><td>Enganosos: coruja Duo triste (culpa), ofensivas, notificações excessivas, seis etapas até o preço. Claros: exclusão da conta em 3 cliques</td><td>Ética, heurística de controle e liberdade, visibilidade</td></tr>
+<tr><td><strong>Dark Patterns in Games</strong><br><small>ICEIS 2025, UFAM</small></td><td>Catálogo de 13 dark patterns em jogos; questionário Likert de 10 pontos com 30 jogadores; testes não paramétricos</td><td><strong>Monetários</strong> (Pay Wall, loot boxes) são os mais nocivos; temporais (Grinding) os menos</td><td>Questionário e Likert, satisfação, ética</td></tr>
+<tr><td><strong>Usabilidade em jogos sérios</strong><br><small>SBIE 2022, UnB</small></td><td>Avaliação heurística de 3 jogos que ensinam IHC por 2 avaliadoras, com 37 especificações de usabilidade e Kappa de Cohen</td><td>UsabilityGame 73%, MACteaching 71,4%, UsabiliCity 52,6%. Mais implementado: Cancelar/Desfazer. κ = 0,9025</td><td>Avaliação heurística, controle e liberdade</td></tr>
+<tr><td><strong>Diretrizes de apps para idosos</strong><br><small>Gomez-Hernandez et al., JMIR 2023</small></td><td>Revisão sistemática: de 4.168 artigos para 40 estudos com teste de usabilidade com pessoas de 60+</td><td>2 regras de ouro (<strong>simplificar</strong> e <strong>aumentar controles e espaçamento</strong>) e 25 diretrizes; defende design universal</td><td>Lei de Fitts, WCAG (toque, contraste), heurísticas</td></tr>
+<tr><td><strong>LLMs em realidade estendida</strong><br><small>Tang et al., CHI ’25</small></td><td>Revisão de 135 estudos sobre LLMs + XR (context-aware computing)</td><td>4 pilares de consciência (situacional, autoconsciência, espacial, social) e proposta de um 5º, a <strong>ética</strong></td><td>Carga cognitiva (Miller), minimalismo, golfo de execução</td></tr>
+</table></div>
+<p><strong>Temas que se repetem:</strong> idosos aparecem em dois artigos (simplificar, botões grandes, privacidade); ética e manipulação em outros dois (dark × bright patterns); e quase todos usam métodos que vimos: heurística, questionário, teste de usabilidade e design participativo.</p>`},
+
+ {id:"r-revisao", t:"Revisão rápida: o que mais confunde na prova", body:`
+<h3>Pares que costumam ser confundidos</h3>
+<div class="tbl"><table>
+<tr><th>Este…</th><th>…não é aquele</th></tr>
+<tr><td><strong>Eficácia</strong>: conseguiu atingir o objetivo</td><td><strong>Eficiência</strong>: quanto tempo e esforço gastou</td></tr>
+<tr><td><strong>Golfo de execução</strong>: “como faço?”</td><td><strong>Golfo de avaliação</strong>: “deu certo?”</td></tr>
+<tr><td><strong>Affordance</strong>: o objeto mostra o que se faz com ele</td><td><strong>Metáfora</strong>: usa algo do mundo real para explicar (lixeira, carrinho)</td></tr>
+<tr><td><strong>Comunicabilidade</strong>: a interface transmite a intenção do designer</td><td><strong>Usabilidade</strong>: o usuário atinge o objetivo bem</td></tr>
+<tr><td><strong>Inspeção</strong>: especialista, sem usuários</td><td><strong>Teste de usabilidade</strong>: usuários reais</td></tr>
+<tr><td><strong>Avaliação heurística</strong>: problemas gerais segundo heurísticas</td><td><strong>Percurso cognitivo</strong>: facilidade de aprender explorando</td></tr>
+<tr><td><strong>Hick-Hyman</strong>: número de opções (decidir)</td><td><strong>Fitts</strong>: tamanho e distância do alvo (apontar)</td></tr>
+<tr><td><strong>Perfil</strong>: grupos reais descritos com dados</td><td><strong>Persona</strong>: personagem fictício que representa um grupo</td></tr>
+<tr><td><strong>Cenário</strong>: narrativa de uma situação de uso</td><td><strong>História de usuário</strong>: “Como…, quero…, para que…”</td></tr>
+<tr><td><strong>Mockup</strong>: visual final estático</td><td><strong>Protótipo de alta fidelidade</strong>: visual final e interativo</td></tr>
+<tr><td><strong>Brainstorming</strong>: explora necessidades, não projeta</td><td><strong>Design participativo</strong>: usuários ajudam a projetar a solução</td></tr>
+<tr><td><strong>UX Designer</strong>: a experiência como um todo</td><td><strong>UI Designer</strong>: a aparência (cores, tipografia)</td></tr>
+<tr><td><strong>Norman (1986)</strong>: interação como ciclo cognitivo</td><td><strong>de Souza (2005)</strong>: interação como comunicação designer → usuário</td></tr>
+</table></div>
+
+<h3>Números para decorar</h3>
+<div class="num-grid">
+<div class="num"><b>7 ± 2</b><span>itens na memória de trabalho (Miller)</span></div>
+<div class="num"><b>150 ms</b><span>constante k de Hick-Hyman</span></div>
+<div class="num"><b>100 ms</b><span>constante k de Fitts</span></div>
+<div class="num"><b>4.5:1</b><span>contraste mínimo AA (3:1 para texto grande)</span></div>
+<div class="num"><b>200%</b><span>zoom sem perder legibilidade (1.4.4)</span></div>
+<div class="num"><b>24 px</b><span>área de toque mínima AA (44 px no AAA)</span></div>
+<div class="num"><b>3 / s</b><span>limite de flashes por segundo (2.3.1)</span></div>
+<div class="num"><b>3 a 10</b><span>pessoas num grupo de foco</span></div>
+<div class="num"><b>8 a 12</b><span>pessoas num brainstorming</span></div>
+<div class="num"><b>10</b><span>heurísticas de Nielsen</span></div>
+<div class="num"><b>4</b><span>níveis de severidade (cosmético → catastrófico)</span></div>
+<div class="num"><b>7</b><span>etapas da teoria da ação</span></div>
+</div>
+
+<h3>Fórmulas</h3>
+<div class="formula">Hick-Hyman:  T = 150 · log₂(N + 1)          ex.: N = 7  → 450 ms
+Fitts:       T = 100 · log₂(D / S + 0,5)      ex.: D = 7, S = 2 → 200 ms</div>
+<p class="note">Truque para log₂: ache a potência de 2. log₂ 8 = 3 porque 2³ = 8; log₂ 16 = 4; log₂ 4 = 2.</p>`}
+];
+
+function renderResumo(){
+  const secs = RESUMO_SECS.map((s,i)=>`<section class="r-sec"><h2 id="${s.id}" data-label="${s.t}"><span class="r-n">${String(i+1).padStart(2,"0")}</span>${s.t}</h2>${s.body}</section>`).join("");
+  renderContent("resumo", `
+    <a class="back" href="#inicio">← Início</a>
+    <div class="home-header" style="margin-bottom:8px">
+      <div class="eyebrow">Resumo completo</div>
+      <h1 class="page-h1">Toda a matéria de <span class="hl">IHC</span>, explicada</h1>
+      <p class="home-sub">O conteúdo das aulas IHC00 a IHC08 e dos artigos reorganizado por assunto, com exemplos, para ler do começo ao fim. No final há uma revisão rápida com o que mais confunde, números e fórmulas.</p>
+    </div>
+    <div class="prose">${secs}</div>
+    <div class="study-cta">
+      <div class="sec-title" style="margin:0">Hora de praticar</div>
+      <button class="btn-start" id="resumo-prova">Simular prova (${provaQty} questões) →</button>
+      <nav class="pager"><a href="#inicio"><small>←</small>Início</a><a class="nx" href="#${MODS[0].id}"><small>Aula ${MODS[0].n} →</small>${MODS[0].title}</a></nav>
+    </div>`);
+  $("#resumo-prova").addEventListener("click", ()=>startProva(provaQty));
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT DAS PÁGINAS DE CONTEÚDO: menu lateral + texto
+   ══════════════════════════════════════════════════════ */
+let sideObserver = null;
+function renderContent(activeId, inner){
+  const link = (id, n, label, extra="") => `<a class="side-link ${activeId===id?"on":""}" href="#${id}" ${activeId===id?'aria-current="page"':""}><span class="side-n">${n}</span><span>${label}</span></a>${activeId===id?'<div class="side-subs" id="side-subs"></div>':""}`;
+  const aulas = MODS.map(m=>m.kind==="artigo"?"":link(m.id, m.n, m.title)).join("");
+  const arts = MODS.map(m=>m.kind==="artigo"?link(m.id, m.n, m.title):"").join("");
+  $("#view").classList.add("wide");
+  $("#view").innerHTML = `
+  <div class="content-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side" id="side" aria-label="Tópicos da matéria">
+      <div class="side-top"><span class="side-title">Tópicos</span><button class="side-close" id="side-close" aria-label="Fechar menu">✕</button></div>
+      ${link("resumo", "★", "Resumo completo da matéria")}
+      <div class="side-group">Aulas</div>${aulas}
+      <div class="side-group">Artigos dos seminários</div>${arts}
+      <button class="side-cta" id="side-prova">Simular prova →</button>
+      <a class="side-home" href="#inicio">← Voltar ao início</a>
+    </aside>
+    <div class="content-main">
+      <button class="side-toggle" id="side-toggle" aria-controls="side" aria-expanded="false">☰ Tópicos</button>
+      ${inner}
+    </div>
+  </div>`;
+  const side = $("#side"), bd = $("#side-backdrop"), tg = $("#side-toggle");
+  const setOpen = o => { side.classList.toggle("open", o); bd.classList.toggle("open", o); tg.setAttribute("aria-expanded", o); };
+  tg.addEventListener("click", ()=>setOpen(!side.classList.contains("open")));
+  bd.addEventListener("click", ()=>setOpen(false));
+  $("#side-close").addEventListener("click", ()=>setOpen(false));
+  side.querySelectorAll(".side-link").forEach(a=>a.addEventListener("click", ()=>setOpen(false)));
+  $("#side-prova").addEventListener("click", ()=>{ setOpen(false); startProva(provaQty); });
+
+  // seções da página atual no menu
+  const heads = [...document.querySelectorAll(".content-main .prose h2")];
+  heads.forEach((h,i)=>{ if(!h.id) h.id = `sec-${i+1}`; });
+  const subs = $("#side-subs");
+  if(subs){
+    subs.innerHTML = heads.map(h=>`<button class="side-sub" data-target="${h.id}">${h.dataset.label || h.textContent}</button>`).join("");
+    subs.addEventListener("click", e=>{
+      const b = e.target.closest(".side-sub"); if(!b) return;
+      document.getElementById(b.dataset.target).scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+      setOpen(false);
+    });
+  }
+  if(sideObserver) sideObserver.disconnect();
+  if(subs && "IntersectionObserver" in window){
+    sideObserver = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{ if(en.isIntersecting){
+        subs.querySelectorAll(".side-sub").forEach(b=>b.classList.toggle("on", b.dataset.target===en.target.id));
+      }});
+    }, {rootMargin:"-90px 0px -70% 0px"});
+    heads.forEach(h=>sideObserver.observe(h));
+  }
+}
+
 function renderAula(mi){
   const m = MODS[mi], prev = MODS[mi-1], next = MODS[mi+1];
   const n = countBy(q=>q.mi===mi);
   const inQuiz = quiz && !quiz.finished;
-  $("#view").innerHTML = `
-  <section>
+  renderContent(m.id, `
     <a class="back" href="${inQuiz?"#simulado":"#inicio"}">← ${inQuiz?`Voltar ao simulado (questão ${quiz.cur+1})`:"Início"}</a>
     <div class="home-header" style="margin-bottom:8px">
       <div class="eyebrow">${m.kind==="artigo"?`Artigo ${m.n}`:`Aula ${m.n}`} · ${m.file}</div>
-      <h1 style="font-size:clamp(28px,4.5vw,42px)">${m.title}</h1>
+      <h1 class="page-h1">${m.title}</h1>
       <p class="home-sub">${m.lead}</p>
     </div>
     <div class="prose">${m.body}</div>
     <div class="study-cta">
       <div class="sec-title" style="margin:0">Praticar</div>
-      <button class="btn-start" id="practice">Fazer as ${n} questões desta aula →</button>
+      <button class="btn-start" id="practice">Fazer as ${n} questões ${m.kind==="artigo"?"deste artigo":"desta aula"} →</button>
       <nav class="pager">
-        ${prev?`<a href="#${prev.id}"><small>← ${aulaTag(mi-1)}</small>${prev.title}</a>`:`<a href="#inicio"><small>←</small>Início</a>`}
+        ${prev?`<a href="#${prev.id}"><small>← ${aulaTag(mi-1)}</small>${prev.title}</a>`:`<a href="#resumo"><small>←</small>Resumo completo</a>`}
         ${next?`<a class="nx" href="#${next.id}"><small>${aulaTag(mi+1)} →</small>${next.title}</a>`:`<a class="nx" href="#inicio"><small>→</small>Simular prova</a>`}
       </nav>
-    </div>
-  </section>`;
+    </div>`);
   $("#practice").addEventListener("click", ()=>startQuiz(BANK.filter(q=>q.mi===mi), 999));
   bindCalcs();
 }
@@ -1998,7 +2458,10 @@ function showResults(){
 function route(){
   const h = location.hash.slice(1) || "inicio";
   const mi = MODS.findIndex(m=>m.id===h);
-  if(mi>=0) renderAula(mi);
+  $("#view").classList.remove("wide");
+  if(sideObserver){ sideObserver.disconnect(); sideObserver = null; }
+  if(h==="resumo") renderResumo();
+  else if(mi>=0) renderAula(mi);
   else if(h==="simulado" && quiz) { quiz.finished ? showResults() : renderQ(); }
   else renderHome();
   updateLive();
