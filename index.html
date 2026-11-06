@@ -325,6 +325,8 @@ main.wide{max-width:1240px}
 .prova-card.concurso.active .sel-check{display:flex;background:var(--orange)}
 .aula-card[href="#concursos"] .aula-num{color:var(--orange)}
 .aula-card[href="#concursos"]:hover{border-color:var(--orange);background:rgba(255,140,66,.07)}
+.btn-conc{width:100%;padding:13px;background:transparent;color:var(--orange);border:1px solid rgba(255,140,66,.55);border-radius:8px;font-family:var(--f-display);font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
+.btn-conc:hover{background:rgba(255,140,66,.1)}
 .conc-opt{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--text2);line-height:1.5;cursor:pointer}
 .conc-opt input{accent-color:var(--orange);margin-top:3px;flex-shrink:0}
 .conc-opt strong{color:var(--orange)}
@@ -2239,6 +2241,7 @@ function renderHome(){
       </div>
       <label class="conc-opt" for="prova-conc"><input type="checkbox" id="prova-conc" ${provaConc?"checked":""}> <span>Priorizar questões de <strong>concursos 2025–2026</strong> nas partes de WCAG e matéria (o professor avisou que a prova terá questões de concurso)</span></label>
       <button class="btn-start" id="btn-prova">Simular prova →</button>
+      <button class="btn-conc" id="btn-conc">🏛️ Fazer só as questões de concursos (${countBy(q=>q.src==="concurso")}) →</button>
     </div>
 
     <a class="resumo-card" href="#resumo"><div><b>★ Resumo completo da matéria</b><span>Toda a matéria explicada por assunto, com exemplos, quadro do que mais confunde, números e fórmulas para decorar.</span></div><span class="go">Ler o resumo →</span></a>
@@ -2309,6 +2312,7 @@ function renderHome(){
   $("#prova-qty").addEventListener("change", e=>{ provaQty = +e.target.value; $("#mix-rest").textContent = provaQty-PROVA_MIN; });
   $("#btn-prova").addEventListener("click", ()=>startProva(provaQty));
   $("#prova-conc").addEventListener("change", e=>{ provaConc = e.target.checked; });
+  $("#btn-conc").addEventListener("click", ()=>startQuiz(BANK.filter(q=>q.src==="concurso"), 999));
   $("#provas").addEventListener("click", e=>{
     const b = e.target.closest(".prova-card"); if(!b) return; selProva = b.dataset.prova;
     document.querySelectorAll(".prova-card").forEach(c=>{ const on=c.dataset.prova===selProva; c.classList.toggle("active",on); c.setAttribute("aria-pressed",on); });
