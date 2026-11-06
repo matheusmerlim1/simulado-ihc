@@ -315,6 +315,21 @@ main.wide{max-width:1240px}
 }
 @media (prefers-reduced-motion: reduce){ .side{transition:none} }
 
+/* CONCURSOS */
+.tag-conc{color:var(--orange);border-color:rgba(255,140,66,.45);background:rgba(255,140,66,.08)}
+.q-ctx.conc{background:rgba(255,140,66,.07);border-color:rgba(255,140,66,.28);border-left-color:var(--orange)}
+.q-ctx.conc .q-ctx-head{color:var(--orange)}
+.prova-selector{grid-template-columns:repeat(4,minmax(0,1fr))}
+.prova-card.concurso.active{border-color:var(--orange);background:rgba(255,140,66,.07)}
+.prova-card.concurso .prova-name{color:var(--orange)}
+.prova-card.concurso.active .sel-check{display:flex;background:var(--orange)}
+.aula-card[href="#concursos"] .aula-num{color:var(--orange)}
+.aula-card[href="#concursos"]:hover{border-color:var(--orange);background:rgba(255,140,66,.07)}
+.conc-opt{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--text2);line-height:1.5;cursor:pointer}
+.conc-opt input{accent-color:var(--orange);margin-top:3px;flex-shrink:0}
+.conc-opt strong{color:var(--orange)}
+@media(max-width:820px){ .prova-selector{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
 /* FIGURAS DAS QUESTÕES */
 .q-fig{margin:0 0 18px;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;overflow-x:auto}
 .q-fig svg{max-width:100%;height:auto;display:block}
@@ -1922,6 +1937,210 @@ Object.entries(MORE_OPEN).forEach(([id, o])=>{
   BANK.push({src:"aulas", type:"open", mi, tema:temaOf(MODS[mi],-1,"open"), text:o.q, keys:o.keys, model:o.model, exp:"", diff:DMAP[o.d]||"medium"});
 });
 const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* ══════════════════════════════════════════════════════
+   QUESTÕES DE CONCURSOS 2025–2026 (módulo de conteúdo + banco)
+   ══════════════════════════════════════════════════════ */
+MODS.push({ id:"concursos", kind:"concurso", n:"C", tag:"Concurso", eyebrow:"Concursos 2025–2026 · enunciados adaptados com fonte",
+  title:"Questões de concursos 2025–2026",
+  lead:"O que as bancas cobraram de IHC em 2026 (e algumas de 2025): prototipação, acessibilidade, UX e heurísticas. As questões do simulado trazem banca, órgão e cargo.",
+  topics:"Prototipação · WCAG, NBR 17225 e eMAG · UX e Design Thinking · heurísticas · como cada banca pergunta",
+  body:`
+<h2>O que mais caiu em 2026</h2>
+<p>Levantamento feito em provas de 2026 da FGV (DATAPREV, MPE-ES, NAV Brasil, AL-RO), FCC (TJ-CE, MPE-AL, ARTESP), Cebraspe (TCE-RN, FUNPRESP-JUD, SEDUC-PI), VUNESP (PREVCOM), FEPESE (CIDASC), FURB, Instituto Legalle (CIGA-SC), IBGP, Instituto Access e FCPC.</p>
+<div class="tbl"><table>
+<tr><th>Tema</th><th>Como aparece</th><th>Onde estudar aqui</th></tr>
+<tr><td><strong>Prototipação</strong></td><td>Descartável × evolutiva, horizontal × vertical, baixa × alta fidelidade, protótipo × MVP</td><td>Aula 04 e a seção abaixo</td></tr>
+<tr><td><strong>Acessibilidade</strong></td><td>Critérios das WCAG 2.1/2.2 (cor, teclado, foco, nome e papel), NBR 17225:2025, eMAG</td><td>Aula 08 e a seção abaixo</td></tr>
+<tr><td><strong>UX e Design Thinking</strong></td><td>Pesquisar com usuários e prototipar antes de implementar; UX = simples, eficiente e satisfatório</td><td>Aulas 02, 03 e 05</td></tr>
+<tr><td><strong>Heurísticas de Nielsen</strong></td><td>Reconhecer a heurística pela descrição; julgar afirmações V/F</td><td>Aula 06</td></tr>
+<tr><td><strong>Elicitação de requisitos</strong></td><td>Ciclo de uma técnica: planejar, coletar, analisar, validar e documentar</td><td>Aula 02</td></tr>
+<tr><td><strong>Interface web</strong></td><td>Design responsivo mobile-first, consistência de menus, arquitetura de informação</td><td>Aulas 04 e 06</td></tr>
+</table></div>
+
+<h2>Prototipação nas provas</h2>
+<p>É o tema que mais apareceu em 2026 e vai além do que os slides mostram. As distinções cobradas:</p>
+<div class="tbl"><table>
+<tr><th>Conceito</th><th>O que é</th><th>Pegadinha comum</th></tr>
+<tr><td><strong>Protótipo descartável</strong> (throwaway)</td><td>Feito rápido e de modo informal só para esclarecer requisitos e dúvidas de usabilidade; depois o código é jogado fora.</td><td>Dizer que ele exige engenharia rigorosa desde o início (isso é da evolutiva).</td></tr>
+<tr><td><strong>Protótipo evolutivo</strong></td><td>É refinado até virar o sistema final; por isso exige cuidado com arquitetura e qualidade do código desde o começo.</td><td>Dizer que dá “liberdade criativa sem regras” ou que é só para baixo orçamento.</td></tr>
+<tr><td><strong>Horizontal</strong></td><td>Mostra a <strong>visão geral</strong> do sistema: muitas telas e funções, com pouca profundidade.</td><td>Confundir com vertical.</td></tr>
+<tr><td><strong>Vertical</strong></td><td>Implementa <strong>uma funcionalidade</strong> em profundidade, passando por todas as camadas.</td><td>Dizer que ignora a lógica e só mostra telas.</td></tr>
+<tr><td><strong>Baixa × alta fidelidade</strong></td><td>Baixa: papel, barata, valida fluxo e arquitetura de informação. Alta: parece o produto, valida visual, interação e usabilidade realista.</td><td>A alta fidelidade pode distrair os stakeholders com detalhes cosméticos.</td></tr>
+<tr><td><strong>MVP</strong></td><td>Produto mínimo <em>real</em>, colocado diante de usuários reais para validar uma hipótese de negócio.</td><td>Chamar desenho em papel de MVP.</td></tr>
+<tr><td><strong>Mágico de Oz</strong></td><td>Uma pessoa simula, escondida, o comportamento do sistema; a função ainda não existe.</td><td>Dizer que a função já precisa estar implementada.</td></tr>
+</table></div>
+<p>Em processos ágeis a prototipação <strong>combina</strong> com o desenvolvimento incremental: protótipos evolutivos podem virar parte do incremento.</p>
+
+<h2>Acessibilidade nas provas</h2>
+<ul>
+<li><strong>Cor</strong> nunca pode ser o único meio de transmitir informação, nem com bom contraste (1.4.1).</li>
+<li><strong>Sem armadilha de teclado</strong> (2.1.2): se o foco entra num componente pelo teclado, deve conseguir sair dele também pelo teclado.</li>
+<li><strong>Foco visível e em ordem lógica</strong> (2.4.3 e 2.4.7).</li>
+<li><strong>Nome e papel</strong> (role) de cada componente devem ser determináveis pelo código (4.1.2), para o leitor de tela anunciar “botão Enviar”.</li>
+<li><strong>Tabelas</strong> complexas precisam marcar no código a relação entre células e cabeçalhos (1.3.1).</li>
+<li><strong>Texto justificado</strong> atrapalha a leitura de pessoas com dislexia ou deficiência cognitiva; as WCAG recomendam <em>não</em> justificar (1.4.8, AAA).</li>
+<li><strong>alt</strong> serve para o leitor de tela ler a descrição de uma imagem significativa; elementos decorativos devem ser ignorados.</li>
+<li><strong>NBR 17225:2025</strong> classifica imagens: decorativa, funcional, de texto, de conteúdo e <strong>complexa</strong> (infográfico, gráfico), que precisa de um texto curto que a identifique <em>e</em> de uma descrição detalhada.</li>
+<li><strong>eMAG</strong>: o texto do link deve fazer sentido fora de contexto (“Saiba mais sobre acessibilidade digital”, e não “clique aqui”).</li>
+<li>As WCAG são <strong>recomendações do W3C</strong>, com quatro princípios e três níveis (A, AA, AAA). Não são uma lei mundial nem uma ferramenta de teste. Atender ao nível A <em>não</em> significa atender ao AA, e a conformidade vale para páginas inteiras, não para pedaços.</li>
+<li>Acessibilidade inclui necessidades <strong>temporárias e cognitivas</strong>, não só deficiências físicas permanentes.</li>
+</ul>
+
+<h2>UX, Design Thinking e heurísticas</h2>
+<ul>
+<li>UX é tornar o uso <strong>simples, eficiente e satisfatório</strong>; marketing, descontos e cores da marca não resolvem dificuldade de uso.</li>
+<li>Design Thinking / Product Discovery: <strong>pesquisar com usuários → sintetizar necessidades → prototipar → avaliar com usuários</strong>, antes de implementar.</li>
+<li>Heurísticas mais cobradas: visibilidade do status do sistema, controle e liberdade (“saída de emergência”), prevenção de erros, minimalismo, mensagens de erro em linguagem simples. Usar jargão técnico <strong>contraria</strong> Nielsen.</li>
+<li>Navegação: menus consistentes entre páginas e indicação de onde o usuário está; nada de só ícones sem rótulo ou de mostrar o máximo de opções.</li>
+<li>Arquitetura de informação / taxonomia: organizar e rotular a informação de um jeito que faça sentido para o usuário.</li>
+<li>Design responsivo: <strong>mobile-first</strong>, layout fluido, meta viewport e media queries, com uma única base de código.</li>
+</ul>
+
+<h2>Como cada banca pergunta</h2>
+<div class="tbl"><table>
+<tr><th>Banca</th><th>Estilo</th><th>Dica</th></tr>
+<tr><td>Cebraspe</td><td>Itens Certo/Errado; um erro anula um acerto</td><td>Desconfie de termos absolutos: “necessariamente”, “sempre”, “apenas”, “totalmente”</td></tr>
+<tr><td>FGV</td><td>Casos práticos com personagens (“Sara, engenheira…”) e itens I, II, III</td><td>Classifique cada item antes de olhar as alternativas</td></tr>
+<tr><td>FCC</td><td>Cenários de órgãos públicos e normas (NBR 17225)</td><td>A alternativa certa costuma ser a mais centrada no usuário</td></tr>
+<tr><td>FEPESE, VUNESP, outras</td><td>Definição direta ou V/F em sequência</td><td>Elimine as alternativas absurdas primeiro</td></tr>
+</table></div>
+<p class="note">Os enunciados do simulado são adaptados das provas originais. Só a prova da CIDASC 2026 (FEPESE) tem o gabarito oficial publicado no caderno; nas outras, a resposta foi conferida pelo conteúdo, e cada questão indica isso.</p>
+
+<h2>Fontes</h2>
+<ul>
+<li><a href="https://2025cidasc.fepese.org.br/?arquivo=S05.pdf&go=download&inline=1" target="_blank" rel="noopener">Caderno de prova CIDASC 2026 (FEPESE), Analista de TIC – Sistemas e Negócios</a></li>
+<li><a href="https://www.qconcursos.com/questoes-de-concursos/disciplinas/tecnologia-da-informacao-engenharia-de-software/prototipacao/questoes" target="_blank" rel="noopener">QConcursos: questões de prototipação</a></li>
+<li><a href="https://www.qconcursos.com/questoes-de-concursos/disciplinas/tecnologia-da-informacao-arquitetura-de-software/acessibilidade-de-software/questoes" target="_blank" rel="noopener">QConcursos: questões de acessibilidade de software</a></li>
+<li><a href="https://www.qconcursos.com/questoes-de-concursos/disciplinas/tecnologia-da-informacao-arquitetura-de-software/usabilidade/questoes" target="_blank" rel="noopener">QConcursos: questões de usabilidade</a></li>
+</ul>`,
+  qs:[]
+});
+
+const CONC = [
+ // ---------- 2026, com gabarito oficial ----------
+ {b:"FEPESE",y:2026,org:"CIDASC",cargo:"Analista de TIC – Sistemas e Negócios",ofic:1,t:"materia",d:"e",
+  q:"A engenharia de usabilidade busca interfaces fáceis de usar e eficientes. Qual princípio de usabilidade popularizado por Jakob Nielsen diz que o sistema deve sempre manter os usuários informados sobre o que está acontecendo, com feedback apropriado em tempo hábil?",
+  o:["Visibilidade do status do sistema","Prevenção de erros","Consistência e padrões","Controle e liberdade do usuário"],
+  e:"É a heurística 1 de Nielsen. Gabarito oficial: alternativa d do caderno."},
+ {b:"FEPESE",y:2026,org:"CIDASC",cargo:"Analista de TIC – Sistemas e Negócios",ofic:1,t:"materia",d:"m",
+  q:"Uma figura mostra o ciclo de uma técnica de investigação (elicitação de requisitos): 1. Planejamento → 2. Coleta de informações → 3. Análise e síntese → 4. Validação com stakeholders → 5. Documentação de requisitos. Qual técnica segue melhor esse ciclo?",
+  o:["Entrevista estruturada com roteiro predefinido, coleta direta, análise das respostas, apresentação dos requisitos aos stakeholders e documentação final","Observação passiva e não estruturada, sem interação com os usuários e sem validação com as partes interessadas","Questionário por e-mail com análise automática e publicação direta dos requisitos, sem revisão dos stakeholders","Uma única reunião livre com todos os stakeholders, com documentação informal"],
+  e:"Só a entrevista estruturada passa por todas as etapas, inclusive a validação com os stakeholders. Gabarito oficial: alternativa a."},
+ // ---------- 2026, prototipação ----------
+ {b:"FGV",y:2026,org:"DATAPREV",cargo:"Analista de TI – Análise de Negócio",t:"materia",d:"h",
+  q:"Sara projeta um portal de autoatendimento. Primeiro, desenhou as telas em papel e testou o fluxo com alguns usuários numa sala de reuniões. Depois, publicou uma página web simples, com um campo de CPF e um botão, para ver se moradores de um bairro se cadastrariam antes de construir o portal completo. Sobre essas estratégias, é correto afirmar:",
+  o:["O desenho em papel é um protótipo de baixa fidelidade, e a página com formulário real enviada à população funciona como MVP","A primeira gerou um protótipo de baixa fidelidade, e a segunda, um de alta fidelidade","O desenho em papel é um MVP que validou a usabilidade inicial, e a página web é um protótipo evolucionário","Ambos são protótipos de baixa fidelidade, pois nenhum tem a funcionalidade completa"],
+  e:"Papel = baixa fidelidade, para testar o fluxo. A página real diante de usuários reais valida uma hipótese de negócio: é um MVP, não um protótipo de alta fidelidade."},
+ {b:"FGV",y:2026,org:"DATAPREV",cargo:"Analista de TI – Análise de Negócio",t:"materia",d:"h",
+  q:"Sobre prototipação, analise:<br>I. Uma vantagem da prototipação evolucionária é a liberdade criativa, sem diretrizes rígidas de codificação, evitando o débito técnico.<br>II. A prototipação descartável exige engenharia e modelagem rigorosas desde o início e tem alto risco de erosão de arquitetura.<br>III. O protótipo descartável é construído de forma rápida e informal, exclusivamente para esclarecer requisitos e dúvidas de usabilidade.<br>Está correto o que se afirma em:",
+  o:["III, apenas","I, apenas","II, apenas","I e III, apenas"],
+  e:"I e II trocam as características: a evolucionária é que exige rigor desde o início, porque vira o sistema; a descartável é rápida e informal."},
+ {b:"VUNESP",y:2026,org:"PREVCOM",cargo:"Analista de Tecnologia",t:"materia",d:"m",
+  q:"Sobre os dois tipos de prototipação de software, evolucionária e descartável, é correto afirmar que a prototipação:",
+  o:["Evolucionária tem como objetivo permitir a entrega do sistema aos usuários finais","Descartável aplica-se exclusivamente a sites da Internet","Evolucionária aplica-se exclusivamente a sistemas de baixo orçamento","Evolucionária não se aplica a sites da Internet"],
+  e:"O protótipo evolucionário é refinado até se tornar o sistema entregue."},
+ {b:"FURB",y:2026,org:"FURB",cargo:"Analista de Sistemas",t:"materia",d:"m",
+  q:"Na Engenharia de Requisitos, a prototipação pode ser evolutiva ou descartável (throwaway). É correto afirmar que:",
+  o:["Na prototipação evolutiva, o protótipo é refinado até fazer parte do sistema final, o que exige cuidado com decisões de arquitetura desde o início","Protótipos de baixa fidelidade nunca podem validar fluxos ou requisitos funcionais","A prototipação descartável não deve ser usada em projetos de software","A técnica “Mágico de Oz” pressupõe que as funcionalidades já estejam implementadas"],
+  e:"No Mágico de Oz uma pessoa simula o sistema justamente porque a função ainda não existe."},
+ {b:"Instituto Legalle",y:2026,org:"CIGA-SC",cargo:"Analista de Sistemas",t:"materia",d:"m",
+  q:"Na engenharia de software, a prototipação apoia o levantamento e a validação de requisitos. O que a prototipação <strong>horizontal</strong> representa?",
+  o:["Uma visão geral do sistema","Uma funcionalidade específica em profundidade","A estrutura do banco de dados relacional","As métricas de desempenho do servidor"],
+  e:"Horizontal = muitas telas e funções com pouca profundidade. Vertical = uma função em todas as camadas."},
+ {b:"FGV",y:2026,org:"AL-RO",cargo:"Analista Legislativo – Análise e Desenvolvimento de Sistemas",t:"materia",d:"h",
+  q:"Um módulo de consulta ao histórico de votações tem interface complexa. Os usuários (assessores e jornalistas) têm dificuldade de dizer que interface precisam, a validação precisa ser rápida e construir a solução completa do zero é caro. Qual tipo de prototipação é mais adequado, e com que objetivo?",
+  o:["Descartável: definir e refinar os requisitos de interface e usabilidade, descartando o código depois para implementar sobre uma arquitetura robusta","Evolutiva: construir o protótipo já como primeira versão do sistema final","Vertical: focar no banco de dados e no back-end, ignorando a interface","Baixa fidelidade: construir um modelo completo com código de produção para medir desempenho"],
+  e:"Com requisitos de interface incertos e necessidade de feedback rápido, o protótipo descartável é o indicado."},
+ {b:"FCC",y:2026,org:"TJ-CE",cargo:"Analista Judiciário – Sistemas da Informação",t:"materia",d:"e",
+  q:"Um tribunal quer melhorar a experiência digital dos cidadãos na consulta de audiências e processos e decidiu adotar Design Thinking e Product Discovery antes de definir funcionalidades. Qual é a abordagem mais adequada?",
+  o:["Pesquisar com usuários, sintetizar necessidades e comportamentos, desenvolver protótipos e avaliá-los com usuários antes da implementação","Levantar as funcionalidades pedidas pelas áreas internas, estimar esforço e definir cronograma","Mapear processos internos e documentar regras de negócio para validar a arquitetura","Identificar restrições técnicas e detalhar requisitos funcionais"],
+  e:"Design Thinking parte do usuário e testa protótipos antes de construir."},
+ // ---------- 2026, acessibilidade ----------
+ {b:"FGV",y:2026,org:"NAV Brasil",cargo:"Engenheiro – Software",t:"wcag",d:"e",
+  q:"Um designer incluiu o atributo alt em todas as imagens de gráficos meteorológicos de um portal. Qual é a justificativa técnica para usar corretamente o alt em imagens significativas?",
+  o:["Permitir que leitores de tela leiam em voz alta a descrição textual do conteúdo da imagem","Esconder a imagem dos robôs de busca para evitar penalidades de SEO","Compactar os pixels da imagem e acelerar o download","Garantir compatibilidade com impressoras antigas"],
+  e:"É o critério 1.1.1 das WCAG: conteúdo não textual precisa de alternativa em texto."},
+ {b:"FGV",y:2026,org:"MPE-ES",cargo:"Analista de Experiência do Usuário – UX",t:"wcag",d:"m",
+  q:"Qual prática de acessibilidade garante que usuários de leitores de tela compreendam e operem o conteúdo web?",
+  o:["O nome e o papel (role) de cada componente devem ser determinados programaticamente no código","A ordem de leitura é definida apenas pela posição visual dos elementos na tela","Leitores de tela deduzem a função de um ícone pela cor ou pela forma, dispensando rótulos","Elementos decorativos devem ser descritos em detalhe pelo leitor de tela"],
+  e:"Critério 4.1.2 (Nome, função, valor). A ordem deve vir do código, ícones precisam de rótulo e enfeites devem ser ignorados."},
+ {b:"FGV",y:2026,org:"MPE-ES",cargo:"Analista de Experiência do Usuário – UX",t:"wcag",d:"h",
+  q:"Com base nas WCAG 2.1, analise:<br>I. A cor pode ser o único meio visual de transmitir informação, desde que haja contraste nítido.<br>II. Se o foco do teclado pode ser movido para um componente, deve ser possível retirá-lo de lá usando apenas o teclado.<br>III. Quando a ordem de navegação afeta o significado, o foco deve seguir uma sequência que preserve a operação e a compreensão.<br>Está correto o que se afirma em:",
+  o:["II e III, apenas","I, apenas","I e II, apenas","I, II e III"],
+  e:"I é falso: cor nunca pode ser o único meio (1.4.1). II é o critério “sem armadilha de teclado” (2.1.2) e III é a ordem do foco (2.4.3)."},
+ {b:"FGV",y:2026,org:"MPE-ES",cargo:"Analista de Experiência do Usuário – UX",t:"wcag",d:"e",
+  q:"Qual é a prática correta em relação ao foco de navegação por teclado?",
+  o:["Garantir que o foco seja visível e siga uma ordem lógica de navegação","Restringir o foco ao elemento mais relevante da página","Trocar o indicador de foco por uma animação que aparece ao passar o mouse","Permitir navegação por teclado apenas nos campos de preenchimento obrigatório"],
+  e:"Critérios 2.4.7 (foco visível) e 2.4.3 (ordem do foco)."},
+ {b:"FCC",y:2026,org:"MPE-AL",cargo:"Analista – Desenvolvimento de Sistemas",t:"wcag",d:"h",
+  q:"Um portal publica um infográfico com dados estatísticos cujo texto alternativo é só “Infográfico institucional”. Segundo a ABNT NBR 17225:2025, qual requisito se aplica?",
+  o:["Imagens complexas: texto que as identifique e uma descrição detalhada disponível na página ou em outra página indicada","Imagens de texto: alternativa com exatamente o mesmo texto da imagem","Imagens funcionais: alternativa que descreva a função do elemento","Imagens decorativas: alternativa vazia para que a tecnologia assistiva as ignore"],
+  e:"Infográficos e gráficos são imagens complexas: o alt curto identifica, e a descrição longa explica os dados."},
+ {b:"Cebraspe",y:2026,org:"SEDUC-PI",cargo:"Professor – Informática",t:"wcag",d:"e",
+  q:"Uma auditoria de UX de um e-commerce exige texto alternativo e alto contraste para usuários com limitações sensoriais. Qual é o objetivo técnico principal dessas diretrizes?",
+  o:["Cumprir normas de acessibilidade (WCAG), permitindo que pessoas com deficiência visual ou daltonismo naveguem e compreendam o conteúdo","Blindar a plataforma contra malware por meio dos metadados","Aumentar o volume de dados no servidor para reduzir a latência","Permitir que o site seja usado por impressoras 3D"],
+  e:"Texto alternativo atende ao 1.1.1; contraste, ao 1.4.3."},
+ {b:"IBGP",y:2026,org:"Câmara de Porto Velho",cargo:"Analista de Comunicação",t:"wcag",d:"m",
+  q:"Segundo o eMAG 3.1 (Modelo de Acessibilidade em Governo Eletrônico), qual prática é recomendada para redigir links acessíveis?",
+  o:["Usar textos de link que façam sentido mesmo lidos fora de contexto, como “Saiba mais sobre acessibilidade digital”","Usar “clique aqui” ou “leia mais”, desde que haja um atributo title com o destino","Priorizar o atributo title para descrever o link","Manter o mesmo texto em links que levam a páginas diferentes"],
+  e:"Leitores de tela costumam listar só os links; “clique aqui” fora de contexto não diz nada."},
+ // ---------- 2026, UX, heurísticas e interface ----------
+ {b:"FGV",y:2026,org:"MPE-ES",cargo:"Analista de Experiência do Usuário – UX",t:"materia",d:"e",
+  q:"Julgue como V ou F, segundo as heurísticas de Nielsen:<br>( ) O sistema deve oferecer “saídas de emergência” claras para o usuário sair de ações indesejadas.<br>( ) O design deve evitar que erros aconteçam.<br>( ) O sistema deve informar ao usuário, em tempo hábil, o que está acontecendo.<br>A sequência correta é:",
+  o:["V – V – V","F – V – V","V – F – V","V – V – F"],
+  e:"São controle e liberdade, prevenção de erros e visibilidade do status do sistema."},
+ {b:"VUNESP",y:2026,org:"PREVCOM",cargo:"Analista de Tecnologia",t:"materia",d:"e",
+  q:"Um aplicativo funciona corretamente, mas os usuários têm dificuldade para encontrar informações e fazer tarefas simples. Qual medida é mais compatível com os princípios de UX?",
+  o:["Tornar o uso mais simples, eficiente e satisfatório","Fazer campanhas de marketing para atrair novos usuários","Oferecer descontos em troca de avaliações positivas","Usar as cores do logotipo em toda a interface"],
+  e:"O problema é de uso, não de divulgação: a resposta é melhorar a experiência."},
+ {b:"Instituto Access",y:2026,org:"UFFS",cargo:"Técnico de TI",t:"materia",d:"e",
+  q:"Na revisão de um portal institucional com base em ergonomia e usabilidade, qual critério de navegação está correto?",
+  o:["Manter a organização dos menus consistente entre as páginas e indicar onde o usuário está","Mudar com frequência a posição dos menus entre as páginas","Usar apenas ícones, sem rótulos de texto","Exibir o máximo de opções ao mesmo tempo"],
+  e:"Consistência e padronização, mais localização (breadcrumb). Ícones sem rótulo e excesso de opções prejudicam."},
+ {b:"Instituto Legalle",y:2026,org:"CIGA-SC",cargo:"Analista de Sistemas",t:"materia",d:"e",
+  q:"Um portal se ajusta a diferentes tamanhos de tela e resoluções, com layout flexível, imagens adaptáveis e menus dinâmicos. Que conceito é esse?",
+  o:["Responsividade","Interoperabilidade","Governo digital","Acessibilidade digital"],
+  e:"Design responsivo adapta o layout ao dispositivo."},
+ {b:"FCC",y:2026,org:"ARTESP",cargo:"Agente de Fiscalização – TI",t:"materia",d:"m",
+  q:"Um portal de transporte é usado em celulares, totens e monitores ultrawide, com uma única base de código. Qual abordagem de design responsivo atende melhor?",
+  o:["Mobile-first com layout fluido, meta viewport, media queries e priorização dos elementos críticos","Dois sites separados, escolhidos pelo user-agent","Layout fixo de 1280 px com zoom e rolagem horizontal","Aviso pedindo para girar o celular para o modo paisagem"],
+  e:"Uma única base adaptável, começando pela tela menor."},
+ {b:"FCPC",y:2026,org:"UFCA",cargo:"Assistente em Administração",t:"materia",d:"m",
+  q:"Como subárea da experiência do usuário, a taxonomia se caracteriza por:",
+  o:["Organizar e rotular a informação de forma que faça sentido para o usuário","Garantir que as interfaces sejam fáceis de usar","Definir o comportamento das interfaces durante a interação","Entender os porquês do produto"],
+  e:"É parte da arquitetura de informação, ligada à classificação de cartões vista na aula 02."},
+ // ---------- 2025 ----------
+ {b:"IF-MT",y:2025,org:"IF-MT",cargo:"Técnico de TI",t:"materia",d:"m",
+  q:"Sobre as heurísticas de Nielsen, analise:<br>I. A interface deve ser intuitiva e informar o usuário, mesmo usando termos técnicos desconhecidos, para manter a consistência.<br>II. Deve haver flexibilidade, com atalhos para usuários experientes.<br>III. A interface deve ter só informações relevantes e essenciais.<br>IV. Mensagens de erro devem usar linguagem simples, indicar o problema e sugerir solução.<br>São verdadeiras:",
+  o:["II, III e IV","I, II e IV","I, III e IV","Todas"],
+  e:"I é falsa: Nielsen pede a linguagem do usuário, sem jargão (correspondência com o mundo real)."},
+ {b:"FGV",y:2025,org:"SEDUC-SP",cargo:"Tecnologia da Informação",t:"wcag",d:"m",
+  q:"Sobre as WCAG 2.2, analise:<br>I. São recomendações do W3C com critérios de acessibilidade para pessoas com deficiência.<br>II. São norma obrigatória e de cumprimento imediato para todos os sites públicos do mundo.<br>III. Estruturam-se em quatro princípios: Perceptível, Operável, Compreensível e Robusto.<br>IV. São um conjunto de ferramentas para testar automaticamente a usabilidade em celulares.<br>V. Têm três níveis de conformidade: A, AA e AAA.<br>Estão corretas:",
+  o:["I, III e V, apenas","I e IV, apenas","II e III, apenas","II, apenas"],
+  e:"As WCAG são recomendações, não lei mundial, e não são ferramenta de teste."},
+ {b:"IDCAP",y:2025,org:"IPJB",cargo:"Tecnologista – TI",t:"wcag",d:"h",
+  q:"Com base nas WCAG 2.2, julgue V ou F:<br>( ) Um site que atende aos critérios de nível A também atende aos de nível AA.<br>( ) Uma página pode ser conforme mesmo usando tecnologias sem suporte a acessibilidade, desde que as informações estejam disponíveis de forma acessível por outros meios.<br>( ) A conformidade é avaliada em partes específicas da página, como só um formulário ou um menu.<br>A sequência correta é:",
+  o:["F – V – F","F – F – F","V – V – F","V – F – V"],
+  e:"O nível AA inclui o A, e não o contrário. A conformidade vale para a página inteira."},
+ {b:"FGV",y:2024,org:"TCE-PA",cargo:"Auditor – Web Design",t:"materia",d:"e",
+  q:"Sobre as heurísticas de Nielsen:<br>I. Usuários executam ações por engano e precisam de uma “saída de emergência” claramente marcada.<br>II. O design deve manter os usuários informados, com feedback adequado em tempo razoável.<br>III. Boas mensagens de erro são importantes, mas os melhores designs evitam que os problemas ocorram.<br>Está correto o que se afirma em:",
+  o:["I, II e III","I, apenas","I e II, apenas","II e III, apenas"],
+  e:"Controle e liberdade, visibilidade do status e prevenção de erros: as três são heurísticas."}
+];
+const CONC_TF = {d:"h", t:"Itens Certo/Errado de concursos recentes (Cebraspe e Quadrix). Julgue cada um.", s:[
+  ["(Cebraspe 2026, TCE-RN) Em processos ágeis, a prototipação é incompatível com o desenvolvimento incremental, pois os protótipos são necessariamente descartáveis.",false],
+  ["(Cebraspe 2026, FUNPRESP-JUD) As diretrizes internacionais de acessibilidade recomendam alinhamento totalmente justificado para maximizar a legibilidade de pessoas com deficiência cognitiva.",false],
+  ["(Quadrix 2025, CRP-SP) Um site acessível deve permitir navegação por teclado, uso de leitores de tela e contraste adequado para pessoas com baixa visão.",true],
+  ["(Quadrix 2025, CRP-SP) A acessibilidade digital é voltada apenas às pessoas com deficiência física permanente, sem incluir necessidades temporárias ou cognitivas.",false],
+  ["(Cebraspe 2025, TCE-RS) No design de interfaces, o modelo em espiral segue iterativamente quatro etapas: análise e modelagem, design, construção e validação da interface.",true]],
+  e:"Protótipos evolutivos combinam com incrementos; texto justificado prejudica a leitura (WCAG 1.4.8); acessibilidade inclui necessidades temporárias e cognitivas. O processo de design de interface em espiral (Pressman) tem essas quatro atividades. Respostas conferidas pelo conteúdo."};
+{
+  const mi = MODS.findIndex(m=>m.id==="concursos");
+  CONC.forEach(x=>BANK.push({src:"concurso", type:"mc", mi, tema:x.t, orig:`${x.b} ${x.y} · ${x.org}`, cargo:x.cargo, ofic:!!x.ofic,
+    text:x.q, options:x.o, answer:0, exp:x.e + (x.ofic ? "" : " (Resposta conferida pelo conteúdo; o gabarito oficial não estava disponível na fonte.)"), diff:DMAP[x.d]||"medium"}));
+  BANK.push({src:"concurso", type:"tf", mi, tema:"materia", orig:"Cebraspe e Quadrix 2025–2026", cargo:"vários cargos de TI", ofic:false,
+    text:CONC_TF.t, statements:CONC_TF.s.map(([text,answer])=>({text,answer})), exp:CONC_TF.e, diff:DMAP[CONC_TF.d]});
+}
 const countBy = f => BANK.filter(f).length;
 const PROVAS = {aulas:"Questões das aulas", pf:"PF 2021.1", all:"Tudo"};
 
@@ -1940,16 +2159,17 @@ const L = ["A","B","C","D","E"];
 function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function pool(){ return BANK.filter(q=>(selProva==="all"||q.src===selProva)&&selAulas.has(q.mi)&&selDiffs.has(q.diff)&&selTypes.has(q.type)); }
 function aulaTag(mi){ return MODS[mi].tag || `Aula ${MODS[mi].n}`; }
-function ctxBlock(q){ const c = MODS[q.mi].ctx; return (q.tema==="artigo" && c) ? `<div class="q-ctx"><span class="q-ctx-head">Questão sobre o artigo · ${MODS[q.mi].title}</span>${c}</div>` : ""; }
-function modLabel(mi){ const m=MODS[mi]; return m.kind==="artigo" ? m.title : `Aula ${m.n} · ${m.title}`; }
+function ctxBlock(q){ if(q.src==="concurso") return `<div class="q-ctx conc"><span class="q-ctx-head">Questão de concurso · ${q.orig}</span>Cargo: ${q.cargo}. Enunciado adaptado da prova original${q.ofic ? "; gabarito oficial da banca" : ""}.</div>`; const c = MODS[q.mi].ctx; return (q.tema==="artigo" && c) ? `<div class="q-ctx"><span class="q-ctx-head">Questão sobre o artigo · ${MODS[q.mi].title}</span>${c}</div>` : ""; }
+function modLabel(mi){ const m=MODS[mi]; return m.kind ? m.title : `Aula ${m.n} · ${m.title}`; }
 
 /* ── PROVA SIMULADA: 4 artigos · 1 Gestalt · 3 WCAG · resto da matéria ── */
 const PROVA_MIX = {artigo:4, gestalt:1, wcag:3};
 const PROVA_MIN = PROVA_MIX.artigo + PROVA_MIX.gestalt + PROVA_MIX.wcag;
 let provaQty = 10;
+let provaConc = true;
 function startProva(n){
   const used = new Set(); const pick = [];
-  const take = (tema, k)=>{ shuffle(BANK.filter(q=>q.tema===tema && !used.has(q))).slice(0,k).forEach(q=>{ used.add(q); pick.push(q); }); };
+  const take = (tema, k)=>{ const c = shuffle(BANK.filter(q=>q.tema===tema && !used.has(q))); if(provaConc) c.sort((a,b)=>(b.src==="concurso")-(a.src==="concurso")); c.slice(0,k).forEach(q=>{ used.add(q); pick.push(q); }); };
   take("artigo", PROVA_MIX.artigo); take("gestalt", PROVA_MIX.gestalt); take("wcag", PROVA_MIX.wcag);
   take("materia", Math.max(0, n - pick.length));
   quiz = {questions:shuffle(pick), cur:0, score:0, history:[], finished:false, reviewOpen:false, prova:true};
@@ -1962,12 +2182,13 @@ function startProva(n){
 function renderHome(){
   const card = (m,mi)=>`
     <a class="aula-card ${m.kind==="artigo"?"art":""}" href="#${m.id}">
-      <span class="aula-num">${m.kind==="artigo"?`ARTIGO ${m.n}`:`AULA ${m.n} · ${m.file}`}</span>
+      <span class="aula-num">${m.kind==="artigo"?`ARTIGO ${m.n}`:m.kind==="concurso"?"CONCURSOS 2025–2026":`AULA ${m.n} · ${m.file}`}</span>
       <span class="aula-name">${m.title}</span>
       <span class="aula-desc">${m.topics}</span>
       <span class="aula-foot">${countBy(q=>q.mi===mi)} questões · ler resumo →</span>
     </a>`;
-  const aulaCards = MODS.map((m,mi)=>m.kind==="artigo"?"":card(m,mi)).join("");
+  const aulaCards = MODS.map((m,mi)=>m.kind?"":card(m,mi)).join("");
+  const concCards = MODS.map((m,mi)=>m.kind==="concurso"?card(m,mi):"").join("");
   const artCards = MODS.map((m,mi)=>m.kind==="artigo"?card(m,mi):"").join("");
   const temaCount = t => countBy(q=>q.tema===t);
   const pills = MODS.map((m,mi)=>`
@@ -1989,7 +2210,7 @@ function renderHome(){
     <div class="home-header">
       <div class="eyebrow">Resumo + Simulado Interativo</div>
       <h1>Interação<br>Humano-<span class="hl">Computador</span></h1>
-      <p class="home-sub">Resumo das aulas IHC00 a IHC08 e dos artigos apresentados nos seminários, com ${BANK.length} questões comentadas: múltipla escolha, V/F e discursivas, incluindo a Prova Final 2021.1.</p>
+      <p class="home-sub">Resumo das aulas IHC00 a IHC08 e dos artigos apresentados nos seminários, com ${BANK.length} questões comentadas: múltipla escolha, V/F e discursivas, incluindo a Prova Final 2021.1 e questões de concursos de 2026.</p>
     </div>
 
     <div class="search-box home-search" role="search">
@@ -2016,6 +2237,7 @@ function renderHome(){
           ${[8,10,12,15,20,25,30].map(v=>`<option value="${v}" ${provaQty===v?"selected":""}>${v} questões</option>`).join("")}
         </select>
       </div>
+      <label class="conc-opt" for="prova-conc"><input type="checkbox" id="prova-conc" ${provaConc?"checked":""}> <span>Priorizar questões de <strong>concursos 2025–2026</strong> nas partes de WCAG e matéria (o professor avisou que a prova terá questões de concurso)</span></label>
       <button class="btn-start" id="btn-prova">Simular prova →</button>
     </div>
 
@@ -2027,10 +2249,14 @@ function renderHome(){
     <div class="sec-title" style="margin-top:32px">Artigos dos seminários</div>
     <div class="aula-grid">${artCards}</div>
 
+    <div class="sec-title" style="margin-top:32px">Concursos</div>
+    <div class="aula-grid">${concCards}</div>
+
     <div class="sec-title" style="margin-top:44px">Simulado personalizado · Prova</div>
     <div class="prova-selector" id="provas">
       ${pcard("aulas","📘","Aulas e artigos","Questões feitas a partir dos slides IHC00–IHC08 e dos artigos dos seminários.")}
       ${pcard("pf","📙","PF 2021.1","As 10 questões discursivas da Prova Final, com resposta-modelo.")}
+      ${pcard("concurso","🏛️","Concursos 2026","Questões adaptadas de provas de concursos de 2025 e 2026, com banca e órgão.")}
       ${pcard("all","📚","Tudo","Questões das aulas e da PF misturadas, para revisão geral.")}
     </div>
 
@@ -2082,6 +2308,7 @@ function renderHome(){
   };
   $("#prova-qty").addEventListener("change", e=>{ provaQty = +e.target.value; $("#mix-rest").textContent = provaQty-PROVA_MIN; });
   $("#btn-prova").addEventListener("click", ()=>startProva(provaQty));
+  $("#prova-conc").addEventListener("change", e=>{ provaConc = e.target.checked; });
   $("#provas").addEventListener("click", e=>{
     const b = e.target.closest(".prova-card"); if(!b) return; selProva = b.dataset.prova;
     document.querySelectorAll(".prova-card").forEach(c=>{ const on=c.dataset.prova===selProva; c.classList.toggle("active",on); c.setAttribute("aria-pressed",on); });
@@ -2458,7 +2685,8 @@ function renderResumo(){
 let sideObserver = null;
 function renderContent(activeId, inner){
   const link = (id, n, label, extra="") => `<a class="side-link ${activeId===id?"on":""}" href="#${id}" ${activeId===id?'aria-current="page"':""}><span class="side-n">${n}</span><span>${label}</span></a>${activeId===id?'<div class="side-subs" id="side-subs"></div>':""}`;
-  const aulas = MODS.map(m=>m.kind==="artigo"?"":link(m.id, m.n, m.title)).join("");
+  const aulas = MODS.map(m=>m.kind?"":link(m.id, m.n, m.title)).join("");
+  const concs = MODS.map(m=>m.kind==="concurso"?link(m.id, "C", m.title):"").join("");
   const arts = MODS.map(m=>m.kind==="artigo"?link(m.id, m.n, m.title):"").join("");
   $("#view").classList.add("wide");
   $("#view").innerHTML = `
@@ -2476,6 +2704,7 @@ function renderContent(activeId, inner){
       ${link("resumo", "★", "Resumo completo da matéria")}
       <div class="side-group">Aulas</div>${aulas}
       <div class="side-group">Artigos dos seminários</div>${arts}
+      <div class="side-group">Concursos</div>${concs}
       </div>
       <button class="side-cta" id="side-prova">Simular prova →</button>
       <a class="side-home" href="#inicio">← Voltar ao início</a>
@@ -2534,7 +2763,7 @@ function buildIndex(){
   const idx = [];
   RESUMO_SECS.forEach((s,i)=>idx.push({page:"resumo", pageLabel:"Resumo completo", sec:s.id, head:s.t, text:plainText(s.body)}));
   MODS.forEach(m=>{
-    const label = m.kind==="artigo" ? `Artigo ${m.n} · ${m.title}` : `Aula ${m.n} · ${m.title}`;
+    const label = m.kind==="concurso" ? m.title : m.kind==="artigo" ? `Artigo ${m.n} · ${m.title}` : `Aula ${m.n} · ${m.title}`;
     const d = document.createElement("div"); d.innerHTML = m.body;
     let cur = {page:m.id, pageLabel:label, sec:null, head:"Introdução", html:""}, k = 0;
     const flush = () => { const t = plainText(cur.html); if(t) idx.push({page:cur.page, pageLabel:cur.pageLabel, sec:cur.sec, head:cur.head, text:t}); };
@@ -2662,14 +2891,14 @@ function renderAula(mi){
   renderContent(m.id, `
     <a class="back" href="${inQuiz?"#simulado":"#inicio"}">← ${inQuiz?`Voltar ao simulado (questão ${quiz.cur+1})`:"Início"}</a>
     <div class="home-header" style="margin-bottom:8px">
-      <div class="eyebrow">${m.kind==="artigo"?`Artigo ${m.n}`:`Aula ${m.n}`} · ${m.file}</div>
+      <div class="eyebrow">${m.eyebrow || `${m.kind==="artigo"?`Artigo ${m.n}`:`Aula ${m.n}`} · ${m.file}`}</div>
       <h1 class="page-h1">${m.title}</h1>
       <p class="home-sub">${m.lead}</p>
     </div>
     <div class="prose">${m.body}</div>
     <div class="study-cta">
       <div class="sec-title" style="margin:0">Praticar</div>
-      <button class="btn-start" id="practice">Fazer as ${n} questões ${m.kind==="artigo"?"deste artigo":"desta aula"} →</button>
+      <button class="btn-start" id="practice">Fazer as ${n} questões ${m.kind==="artigo"?"deste artigo":m.kind==="concurso"?"de concursos":"desta aula"} →</button>
       <nav class="pager">
         ${prev?`<a href="#${prev.id}"><small>← ${aulaTag(mi-1)}</small>${prev.title}</a>`:`<a href="#resumo"><small>←</small>Resumo completo</a>`}
         ${next?`<a class="nx" href="#${next.id}"><small>${aulaTag(mi+1)} →</small>${next.title}</a>`:`<a class="nx" href="#inicio"><small>→</small>Simular prova</a>`}
@@ -2740,7 +2969,7 @@ function renderQ(){
   <section>
     <div class="quiz-top">
       <span class="q-counter">Questão ${quiz.cur+1} / ${quiz.questions.length}</span>
-      <div class="q-tags">${q.src==="pf"?`<span class="tag tag-pf">PF 2021.1 · Q${q.pfn}</span>`:""}<span class="tag tag-topic">${aulaTag(q.mi)}</span><span class="tag tag-${q.diff}">${DLBL[q.diff]}</span>${q.type==="tf"?`<span class="tag tag-tf">V / F</span>`:""}</div>
+      <div class="q-tags">${q.src==="pf"?`<span class="tag tag-pf">PF 2021.1 · Q${q.pfn}</span>`:""}${q.src==="concurso"?`<span class="tag tag-conc">${q.orig.split(" · ")[0]}</span>`:""}<span class="tag tag-topic">${aulaTag(q.mi)}</span><span class="tag tag-${q.diff}">${DLBL[q.diff]}</span>${q.type==="tf"?`<span class="tag tag-tf">V / F</span>`:""}</div>
     </div>
     <div class="prog-track"><div class="prog-fill" style="width:${quiz.cur/quiz.questions.length*100}%"></div></div>
     <div class="q-card"><div class="q-stripe ${q.type==="open"?"open":q.diff}"></div>
@@ -2860,7 +3089,7 @@ function showResults(){
     return `<div class="rt-row"><span class="rt-label">${TEMA_LBL[t]}</span><span class="rt-val ${p>=.7?"g":p>=.5?"y":"r"}">${v.c}/${v.t}</span></div>`; }).join("");
   const review = H.map((h,i)=>`<div class="rev-item ${h.skipped?"skip":h.correct?"ok":"err"}">
       ${ctxBlock(h.q)}<div class="rev-q">${i+1}. ${h.q.text}</div>${figBlock(h.q)}
-      <div class="rev-meta">${h.q.src==="pf"?`<span class="tag tag-pf">PF · Q${h.q.pfn}</span>`:""}<span class="tag tag-topic">${aulaTag(h.q.mi)}</span><span class="tag tag-${h.q.diff}">${DLBL[h.q.diff]}</span>${h.q.type==="tf"?`<span class="tag tag-tf">V / F</span>`:""}
+      <div class="rev-meta">${h.q.src==="pf"?`<span class="tag tag-pf">PF · Q${h.q.pfn}</span>`:""}${h.q.src==="concurso"?`<span class="tag tag-conc">${h.q.orig.split(" · ")[0]}</span>`:""}<span class="tag tag-topic">${aulaTag(h.q.mi)}</span><span class="tag tag-${h.q.diff}">${DLBL[h.q.diff]}</span>${h.q.type==="tf"?`<span class="tag tag-tf">V / F</span>`:""}
         <span class="rev-res" style="color:${h.skipped?"var(--yellow)":h.correct?"var(--green)":"var(--red)"}">${h.skipped?"↷ Pulada":h.correct?"✓ Correto":"✗ Incorreto"}</span></div>
       ${h.q.type==="mc"?`<div class="rev-ans">Sua resposta: ${h.user}${h.correct?"":`<br>Correta: ${h.q.options[h.q.answer]}`}</div>`
         :h.q.type==="tf"?`<div class="rev-ans">${h.q.statements.map(s=>`${s.answer?"V":"F"} · ${s.text}`).join("<br>")}</div>`
